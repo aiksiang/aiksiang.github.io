@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ab3749abe61dd1b16a67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f4e2547cfe9bf5803db1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -705,7 +705,7 @@
 	    _reactRouter.Route,
 	    { path: '/squarepeg/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: '/squarepeg/home', to: '/squarepeg/' }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/squarepeg/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
@@ -715,7 +715,7 @@
 	    _reactRouter.Route,
 	    { path: '/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
@@ -33574,7 +33574,7 @@
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { className: 'link item orange-color', to: '/home' },
+	            { className: 'link item orange-color', to: 'home' },
 	            'Home'
 	          ),
 	          _react2.default.createElement(
