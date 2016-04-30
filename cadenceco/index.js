@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7af16582c2eb10437d6f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "aba401fe51741478ebe5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -684,8 +684,7 @@
 	    _reactRouter.Route,
 	    { path: '/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'collection', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'order', component: _Order2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'contact', component: _Contact2.default })
@@ -694,8 +693,7 @@
 	    _reactRouter.Route,
 	    { path: '/cadenceco/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/cadenceco/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'collection', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'order', component: _Order2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'contact', component: _Contact2.default })
@@ -33001,10 +32999,6 @@
 	  _createClass(Header, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(window.location);
-	      console.log(window.location.host);
-	      console.log(window.location.origin);
-	      console.log(window.location.href);
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'header', className: 'ui container' },

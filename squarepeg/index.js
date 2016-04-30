@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9f77236728165279d96e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cd5e4f3da57083dcdc82"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -705,7 +705,7 @@
 	    _reactRouter.Route,
 	    { path: '/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
+	    _react2.default.createElement(Redirect, { from: 'home', to: '/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
@@ -715,7 +715,7 @@
 	    _reactRouter.Route,
 	    { path: '/squarepeg/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
+	    _react2.default.createElement(Redirect, { from: 'home', to: '/squarepeg/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
