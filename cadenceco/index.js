@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a04dab12d11000530362"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0b4e52c7faad7435059d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -626,7 +626,6 @@
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Index).call(this, props));
 
-	    console.log(props.children);
 	    _this.state = {
 	      children: props.children
 	    };
