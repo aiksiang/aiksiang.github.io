@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7abde335513b79d200fb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e74009bd697f63fc1c39"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33001,6 +33001,9 @@
 	  _createClass(Header, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log(window.location);
+	      console.log(window.location.host);
+	      console.log(window.location.origin);
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'header', className: 'ui container' },
