@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cba2cf005ca96a43333e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dcc1d4424d9d32c04933"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -33574,17 +33574,17 @@
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { className: 'link item orange-color', to: '/' },
+	            { className: 'link item orange-color', to: '/home' },
 	            'Home'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { className: 'link item orange-color', to: '/profile' },
+	            { className: 'link item orange-color', to: 'profile' },
 	            'Profile'
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { className: 'ui dropdown link item orange-color', to: '/assessments' },
+	            { className: 'ui dropdown link item orange-color', to: 'assessments' },
 	            'Assessments',
 	            _react2.default.createElement('i', { className: 'dropdown icon' }),
 	            _react2.default.createElement(
@@ -33612,12 +33612,12 @@
 	            { className: 'right menu' },
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { className: 'link item orange-color', to: '/login' },
+	              { className: 'link item orange-color', to: 'login' },
 	              'Login'
 	            ),
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { className: 'link item orange-color', to: '/contact' },
+	              { className: 'link item orange-color', to: 'contact' },
 	              'Contact Us'
 	            )
 	          )
