@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b6bf4e799a93f7817b4b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f12bddc0a083e1055df9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -705,7 +705,7 @@
 	    _reactRouter.Route,
 	    { path: '/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
