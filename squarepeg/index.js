@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f4e2547cfe9bf5803db1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b6bf4e799a93f7817b4b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -703,9 +703,9 @@
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/squarepeg/', component: Index },
+	    { path: '/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/squarepeg/' }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
@@ -713,9 +713,9 @@
 	  ),
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: Index },
+	    { path: '/squarepeg/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '' }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'assessments', component: _Assessments2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
@@ -33535,7 +33535,7 @@
 	          { className: 'ui container' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { className: 'item no-click logo', to: '/' },
+	            { className: 'item no-click logo', to: 'home' },
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'orange-color' },
