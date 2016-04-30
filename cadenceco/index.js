@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e9313cebb75912f1c40e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4e04a24b817daba5bf05"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -682,8 +682,9 @@
 	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/u/11287735/Cadence/', component: Index },
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/u/11287735/Cadence/index.html' }),
+	    { path: '/', component: Index },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'collection', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'order', component: _Order2.default }),
@@ -691,9 +692,9 @@
 	  ),
 	  _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: Index },
+	    { path: '/cadenceco/', component: Index },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/' }),
+	    _react2.default.createElement(_reactRouter.Redirect, { from: 'home', to: '/cadenceco/index.html' }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'index.html', component: _Home2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'collection', component: _Collection2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'order', component: _Order2.default }),
