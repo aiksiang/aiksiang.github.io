@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f12bddc0a083e1055df9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1daed1e1817e21cf1a5e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -609,19 +609,19 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Profile = __webpack_require__(224);
+	var _Profile = __webpack_require__(225);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _Assessments = __webpack_require__(236);
+	var _Assessments = __webpack_require__(237);
 
 	var _Assessments2 = _interopRequireDefault(_Assessments);
 
-	var _Login = __webpack_require__(237);
+	var _Login = __webpack_require__(238);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Contact = __webpack_require__(238);
+	var _Contact = __webpack_require__(239);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
@@ -633,7 +633,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(239);
+	__webpack_require__(240);
 
 	var Index = function (_Component) {
 	  _inherits(Index, _Component);
@@ -688,7 +688,7 @@
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'content', className: 'ui container header-padding' },
+	          { id: 'content', className: 'ui header-padding' },
 	          this.state.children
 	        )
 	      );
@@ -33614,11 +33614,6 @@
 	              _reactRouter.Link,
 	              { className: 'link item orange-color', to: 'login' },
 	              'Login'
-	            ),
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { className: 'link item orange-color', to: 'contact' },
-	              'Contact Us'
 	            )
 	          )
 	        )
@@ -33647,6 +33642,14 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _Footer = __webpack_require__(224);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33665,12 +33668,154 @@
 	  }
 
 	  _createClass(Home, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('.circular.icon').hover(function () {
+	        $(this).transition({
+	          animation: 'bounce',
+	          duration: 600,
+	          queue: false
+	        });
+	      }, function () {});
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        'Landing Page'
+	        { className: 'home' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'bg-orange' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui container first-block' },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              'What differentiates you?'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement('i', { className: 'suitcase icon' }),
+	              'Find the job that suits you!'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui container second-block' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui stackable three column grid' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column' },
+	              _react2.default.createElement(
+	                'h2',
+	                { className: 'ui center aligned icon header' },
+	                _react2.default.createElement('i', { className: 'circular child icon' }),
+	                'Who?'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                'Both employers and potential employees.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column' },
+	              _react2.default.createElement(
+	                'h2',
+	                { className: 'ui center aligned icon header' },
+	                _react2.default.createElement('i', { className: 'circular edit icon' }),
+	                'What?'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                'A series of Psychometric tests to help you discover yourseleves.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'column' },
+	              _react2.default.createElement(
+	                'h2',
+	                { className: 'ui center aligned icon header' },
+	                _react2.default.createElement('i', { className: 'circular help icon' }),
+	                'Why?'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                'Because truthfully, no one knows what they want.'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'bg-blue' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui container third-block' },
+	            _react2.default.createElement(
+	              'h1',
+	              { className: 'ui centered header block-header' },
+	              'Our Assessments'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'ui stackable three column grid' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  { className: 'ui center header section-header' },
+	                  'MBTI'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  'The Myers–Briggs Type Indicator (MBTI) is an introspective self-report questionnaire designed to indicate psychological preferences in how people perceive the world and make decisions.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  { className: 'ui center header section-header' },
+	                  'NEO Personality Inventory'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  'The Revised NEO Personality Inventory (NEO PI-R) is a personality inventory, published in 1990 and keyed the Big Five personality traits. It is a revised version of Costa and McCrae’s (1978) NEO Personality Inventory. The NEO PI-R consists of 240 items. A shortened version, the NEO Five-Factor Inventory (NEO-FFI), comprises 60 items (12 items per domain). Both the NEO PI-R and NEO-FFI have been updated over the years, with their last updates in 2010. While the NEO PI-R is still published, the NEO Personality Inventory-3 (NEO PI-3) is the 2010 revision of the NEO PI-R. The NEO Five-Factor Inventory-3 (NEO-FFI-3) is the 2010 revision of the NEO-FFI. The revised inventories feature updated norms.'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'column' },
+	                _react2.default.createElement(
+	                  'h2',
+	                  { className: 'ui center header section-header' },
+	                  'Strong Interest Inventory'
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  null,
+	                  'The Strong Interest Inventory (SII) is an interest inventory used in career assessment. As such, career assessments may be used in career counseling. The goal of this assessment is to give insight into a person\'s interests, so that they may have less difficulty in deciding on an appropriate career choice for themselves. It is also frequently used for educational guidance as one of the most popular career assessment tools. The test was developed in 1927 by psychologist Edward Kellog Strong, Jr. to help people exiting the military find suitable jobs. It was revised later by Jo-Ida Hansen, and David Campbell. The modern version of 2004 is based on the Holland Codes typology of psychologist John L. Holland. The Strong is designed for high school students, college students, and adults, and was found to be at about the ninth-grade reading level.'
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -33696,7 +33841,107 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Charts = __webpack_require__(225);
+	var _reactRouter = __webpack_require__(161);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Footer = function (_Component) {
+	  _inherits(Footer, _Component);
+
+	  function Footer() {
+	    _classCallCheck(this, Footer);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
+	  }
+
+	  _createClass(Footer, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ui vertical footer segment' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'ui center aligned container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui stackable grid' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'sixteen wide column' },
+	              _react2.default.createElement(
+	                'h4',
+	                { className: 'ui header' },
+	                'Contact Us'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'ui link list' },
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'item', href: 'https://facebook.com', target: '_blank' },
+	                  'Facebook'
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'item', href: 'https://twitter.com', target: '_blank' },
+	                  'Twitter'
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'item', href: 'https://plus.google.com', target: '_blank' },
+	                  'Google+'
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { className: 'item', href: 'mailto:ang.aik.siang@gmail.com', target: '_blank' },
+	                  'Email'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui horizontal small divided link list' },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              '©2015-2016 Squarepeg'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Footer;
+	}(_react.Component);
+
+	exports.default = Footer;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Charts = __webpack_require__(226);
 
 	var _Charts2 = _interopRequireDefault(_Charts);
 
@@ -33734,7 +33979,7 @@
 	exports.default = Profile;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33749,9 +33994,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactChartjs = __webpack_require__(226);
+	var _reactChartjs = __webpack_require__(227);
 
-	var _colors = __webpack_require__(235);
+	var _colors = __webpack_require__(236);
 
 	var _colors2 = _interopRequireDefault(_colors);
 
@@ -33854,31 +34099,31 @@
 	exports.default = Charts;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  Bar: __webpack_require__(227),
-	  Doughnut: __webpack_require__(230),
-	  Line: __webpack_require__(231),
-	  Pie: __webpack_require__(232),
-	  PolarArea: __webpack_require__(233),
-	  Radar: __webpack_require__(234),
-	  createClass: __webpack_require__(228).createClass
+	  Bar: __webpack_require__(228),
+	  Doughnut: __webpack_require__(231),
+	  Line: __webpack_require__(232),
+	  Pie: __webpack_require__(233),
+	  PolarArea: __webpack_require__(234),
+	  Radar: __webpack_require__(235),
+	  createClass: __webpack_require__(229).createClass
 	};
 
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(228);
+	var vars = __webpack_require__(229);
 
 	module.exports = vars.createClass('Bar', ['getBarsAtEvent']);
 
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -33937,7 +34182,7 @@
 	    };
 
 	    classData.initializeChart = function(nextProps) {
-	      var Chart = __webpack_require__(229);
+	      var Chart = __webpack_require__(230);
 	      var el = ReactDOM.findDOMNode(this);
 	      var ctx = el.getContext("2d");
 	      var chart = new Chart(ctx)[chartType](nextProps.data, nextProps.options || {});
@@ -34013,7 +34258,7 @@
 
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -37755,52 +38000,52 @@
 
 
 /***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var vars = __webpack_require__(228);
-
-	module.exports = vars.createClass('Doughnut', ['getSegmentsAtEvent']);
-
-
-/***/ },
 /* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(228);
+	var vars = __webpack_require__(229);
 
-	module.exports = vars.createClass('Line', ['getPointsAtEvent']);
+	module.exports = vars.createClass('Doughnut', ['getSegmentsAtEvent']);
 
 
 /***/ },
 /* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(228);
+	var vars = __webpack_require__(229);
 
-	module.exports = vars.createClass('Pie', ['getSegmentsAtEvent']);
+	module.exports = vars.createClass('Line', ['getPointsAtEvent']);
 
 
 /***/ },
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(228);
+	var vars = __webpack_require__(229);
 
-	module.exports = vars.createClass('PolarArea', ['getSegmentsAtEvent']);
+	module.exports = vars.createClass('Pie', ['getSegmentsAtEvent']);
 
 
 /***/ },
 /* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var vars = __webpack_require__(228);
+	var vars = __webpack_require__(229);
+
+	module.exports = vars.createClass('PolarArea', ['getSegmentsAtEvent']);
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(229);
 
 	module.exports = vars.createClass('Radar', ['getPointsAtEvent']);
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -37813,7 +38058,7 @@
 	};
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37850,8 +38095,20 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        'Assessments'
+	        { className: 'full' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'bg-blue full' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ui container' },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              'Work in Progress'
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -37862,7 +38119,7 @@
 	exports.default = Assessments;
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38001,7 +38258,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38050,23 +38307,23 @@
 	exports.default = Contact;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(240);
+	var content = __webpack_require__(241);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(242)(content, {});
+	var update = __webpack_require__(243)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(240, function() {
-				var newContent = __webpack_require__(240);
+			module.hot.accept(241, function() {
+				var newContent = __webpack_require__(241);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -38076,21 +38333,21 @@
 	}
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(241)();
+	exports = module.exports = __webpack_require__(242)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".bg-purple,\n.ui.bg-purple {\n  background-color: #9e61ae; }\n\n.purple-color,\n.ui.purple-color {\n  color: #9e61ae !important; }\n\n.bg-green,\n.ui.bg-green {\n  background-color: #3a968c; }\n\n.green-color,\n.ui.green-color {\n  color: #3a968c !important; }\n\n.bg-orange,\n.ui.bg-orange {\n  background-color: #e56a48; }\n\n.orange-color,\n.ui.orange-color {\n  color: #e56a48 !important; }\n\n.bg-yellow,\n.ui.bg-yellow {\n  background-color: #ebd270; }\n\n.yellow-color,\n.ui.yellow-color {\n  color: #ebd270 !important; }\n\n.bg-blue,\n.ui.bg-blue {\n  background-color: #1998b5; }\n\n.blue-color,\n.ui.blue-color {\n  color: #1998b5 !important; }\n\n.bg-red,\n.ui.bg-red {\n  background-color: #ed4747; }\n\n.red-color,\n.ui.red-color {\n  color: #ed4747 !important; }\n\n.ui.main.menu .item {\n  border-left: 0 !important;\n  border-right: 0 !important; }\n\n.ui.main.menu .item {\n  padding-top: 10px;\n  padding-bottom: 10px; }\n  .ui.main.menu .item:before {\n    width: 0; }\n  .ui.main.menu .item.logo {\n    font-size: 1.4em; }\n    .ui.main.menu .item.logo:hover {\n      background: none; }\n  .ui.main.menu .item.link {\n    font-size: 0.8em;\n    border-bottom: 2px solid transparent;\n    -webkit-transition: border-bottom 0.3s ease;\n    transition: border-bottom 0.3s ease;\n    background: transparent; }\n    .ui.main.menu .item.link:hover {\n      background: transparent;\n      border-bottom: 2px solid; }\n\n.ui.menu .dropdown.item .menu {\n  margin-top: 3px; }\n\n.ui.segment.login-block {\n  padding: 2em; }\n\n.input-title {\n  font-size: 1.4em; }\n\n.input-block {\n  margin-top: 2em;\n  margin-bottom: 2em;\n  min-width: 20em; }\n\n.ui.basic.blue.button:hover {\n  background-color: #1678c2 !important;\n  color: #ffffff !important; }\n\n.ui.basic.green.button:hover {\n  background-color: #21ba45 !important;\n  color: #ffffff !important; }\n\nhtml,\nbody,\n#root,\n#main,\n.full {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  font-family: 'Open Sans', sans-serif !important; }\n\n.ui {\n  font-family: 'Open Sans', sans-serif !important; }\n\n.text-center, .title {\n  text-align: center; }\n\n.title {\n  font-size: 4em; }\n\n.center {\n  display: table;\n  margin: 0 auto; }\n\n.absolute-center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n\n.no-click {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default; }\n\n.screenwide {\n  width: 100%;\n  height: 200px; }\n\n.header-padding {\n  padding-top: 58px;\n  height: 100%; }\n", ""]);
+	exports.push([module.id, ".bg-purple,\n.ui.bg-purple {\n  background-color: #9e61ae; }\n\n.purple-color,\n.ui.purple-color {\n  color: #9e61ae !important; }\n\n.bg-green,\n.ui.bg-green {\n  background-color: #3a968c; }\n\n.green-color,\n.ui.green-color {\n  color: #3a968c !important; }\n\n.bg-orange,\n.ui.bg-orange {\n  background-color: #e56a48; }\n\n.orange-color,\n.ui.orange-color {\n  color: #e56a48 !important; }\n\n.bg-yellow,\n.ui.bg-yellow {\n  background-color: #ebd270; }\n\n.yellow-color,\n.ui.yellow-color {\n  color: #ebd270 !important; }\n\n.bg-blue,\n.ui.bg-blue {\n  background-color: #1998b5; }\n\n.blue-color,\n.ui.blue-color {\n  color: #1998b5 !important; }\n\n.bg-red,\n.ui.bg-red {\n  background-color: #ed4747; }\n\n.red-color,\n.ui.red-color {\n  color: #ed4747 !important; }\n\n.ui.main.menu .item {\n  border-left: 0 !important;\n  border-right: 0 !important; }\n\n.ui.main.menu {\n  border: none;\n  box-shadow: none; }\n  .ui.main.menu .item {\n    padding-top: 10px;\n    padding-bottom: 10px; }\n    .ui.main.menu .item:before {\n      width: 0; }\n    .ui.main.menu .item.logo {\n      font-size: 1.4em; }\n      .ui.main.menu .item.logo:hover {\n        background: none; }\n    .ui.main.menu .item.link {\n      font-size: 0.8em;\n      border-bottom: 2px solid transparent;\n      -webkit-transition: border-bottom 0.3s ease;\n      transition: border-bottom 0.3s ease;\n      background: transparent; }\n      .ui.main.menu .item.link:hover {\n        background: transparent;\n        border-bottom: 2px solid; }\n\n.ui.menu .dropdown.item .menu {\n  margin-top: 3px; }\n\n.home .first-block {\n  padding: 5em;\n  color: white; }\n\n.home .second-block,\n.home .third-block {\n  padding: 3em 2em; }\n\n.home .third-block {\n  color: #e6e6e6; }\n  .home .third-block .section-header {\n    color: white; }\n\n.home .block-header {\n  color: #ebd270;\n  padding-bottom: 2em; }\n\n.ui.segment.login-block {\n  padding: 2em; }\n\n.input-title {\n  font-size: 1.4em; }\n\n.input-block {\n  margin-top: 2em;\n  margin-bottom: 2em;\n  min-width: 20em; }\n\n.ui.basic.blue.button:hover {\n  background-color: #1678c2 !important;\n  color: #ffffff !important; }\n\n.ui.basic.green.button:hover {\n  background-color: #21ba45 !important;\n  color: #ffffff !important; }\n\nhtml,\nbody,\n#root,\n#main,\n.full {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  font-family: 'Open Sans', sans-serif !important; }\n\n*:not(.icon) {\n  font-family: 'Open Sans', sans-serif !important; }\n\n.text-center, .title {\n  text-align: center; }\n\n.title {\n  font-size: 4em; }\n\n.center {\n  display: table;\n  margin: 0 auto; }\n\n.absolute-center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n\n.no-click {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default; }\n\n.screenwide {\n  width: 100%;\n  height: 200px; }\n\n.header-padding {\n  padding-top: 58px;\n  height: 100%; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports) {
 
 	/*
@@ -38146,7 +38403,7 @@
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
