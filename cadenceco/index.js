@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dbc6a84278a1f0f9fc46"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b476e92f75707cca4d7c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -596,7 +596,7 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Collection = __webpack_require__(228);
+	var _Collection = __webpack_require__(229);
 
 	var _Collection2 = _interopRequireDefault(_Collection);
 
@@ -33055,6 +33055,10 @@
 
 	var _jewelry2 = _interopRequireDefault(_jewelry);
 
+	var _Divider = __webpack_require__(228);
+
+	var _Divider2 = _interopRequireDefault(_Divider);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33078,7 +33082,10 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_ScreenwideCarousel2.default, null)
+	        _react2.default.createElement(_ScreenwideCarousel2.default, null),
+	        _react2.default.createElement(_Divider2.default, {
+	          name: 'Rose Gold Collection',
+	          description: 'Our finest selection of Rose Gold plated necklaces are of high quality which results in extremely long lasting color!' })
 	      );
 	    }
 	  }]);
@@ -45634,7 +45641,75 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Divider = __webpack_require__(229);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Divider = function (_Component) {
+	  _inherits(Divider, _Component);
+
+	  function Divider() {
+	    _classCallCheck(this, Divider);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Divider).apply(this, arguments));
+	  }
+
+	  _createClass(Divider, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'ui center aligned icon header' },
+	          this.props.name
+	        ),
+	        this.props.description ? _react2.default.createElement(
+	          'div',
+	          { className: 'divider centered' },
+	          this.props.description
+	        ) : null,
+	        this.props.disclaimer ? _react2.default.createElement(
+	          'div',
+	          { className: 'divider centered disclaimer' },
+	          this.props.disclaimer
+	        ) : null,
+	        this.props.icon ? _react2.default.createElement(
+	          'div',
+	          { className: 'ui horizontal divider' },
+	          _react2.default.createElement('i', { className: this.props.icon + ' icon' })
+	        ) : null
+	      );
+	    }
+	  }]);
+
+	  return Divider;
+	}(_react.Component);
+
+	exports.default = Divider;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Divider = __webpack_require__(228);
 
 	var _Divider2 = _interopRequireDefault(_Divider);
 
@@ -45718,74 +45793,6 @@
 	}(_react.Component);
 
 	exports.default = Collection;
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Divider = function (_Component) {
-	  _inherits(Divider, _Component);
-
-	  function Divider() {
-	    _classCallCheck(this, Divider);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Divider).apply(this, arguments));
-	  }
-
-	  _createClass(Divider, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h2',
-	          { className: 'ui center aligned icon header' },
-	          this.props.name
-	        ),
-	        this.props.description ? _react2.default.createElement(
-	          'div',
-	          { className: 'divider centered' },
-	          this.props.description
-	        ) : null,
-	        this.props.disclaimer ? _react2.default.createElement(
-	          'div',
-	          { className: 'divider centered disclaimer' },
-	          this.props.disclaimer
-	        ) : null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'ui horizontal divider' },
-	          _react2.default.createElement('i', { className: this.props.icon + ' icon' })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Divider;
-	}(_react.Component);
-
-	exports.default = Divider;
 
 /***/ },
 /* 230 */
@@ -45995,7 +46002,7 @@
 
 	var _jewelry2 = _interopRequireDefault(_jewelry);
 
-	var _Divider = __webpack_require__(229);
+	var _Divider = __webpack_require__(228);
 
 	var _Divider2 = _interopRequireDefault(_Divider);
 
@@ -46051,7 +46058,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'ui container' },
+	        { className: 'ui container order' },
 	        _react2.default.createElement(_Divider2.default, {
 	          name: 'Order',
 	          description: 'Includes Free solid velvet jewelry box and normal shipping. For registered shipping(highly recommended), please top-up S$2.30.',
@@ -46165,7 +46172,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Divider = __webpack_require__(229);
+	var _Divider = __webpack_require__(228);
 
 	var _Divider2 = _interopRequireDefault(_Divider);
 
@@ -46239,7 +46246,7 @@
 
 
 	// module
-	exports.push([module.id, "#header .ui.menu {\n  border: none;\n  box-shadow: none;\n  font-family: inherit; }\n  #header .ui.menu .item:hover {\n    background-color: transparent; }\n  #header .ui.menu .item:before {\n    background: none; }\n\n#header #brand-logo {\n  display: inline-block;\n  text-align: center;\n  font-size: 3rem;\n  font-weight: 100;\n  color: #ffa3b3;\n  margin: 0 2rem;\n  padding: 1rem 0;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default;\n  white-space: nowrap; }\n\n#header .navbar .item .nav-option {\n  width: 100%;\n  padding: 0 1rem;\n  text-align: center;\n  cursor: pointer;\n  font-size: 1.7rem;\n  color: #555555;\n  position: relative;\n  top: 0;\n  -webkit-transition: top 0.2s ease, color 0.2s ease;\n  transition: top 0.2s ease, color 0.2s ease; }\n  #header .navbar .item .nav-option:hover {\n    top: -0.25rem;\n    color: #ffa3b3; }\n\n.screenwide-container {\n  width: 100%;\n  height: 32vw;\n  overflow-y: hidden;\n  position: relative;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center; }\n  .screenwide-container .screenwide-img {\n    width: 100%; }\n  .screenwide-container .screenwide-name {\n    position: absolute;\n    bottom: 0;\n    font-size: 3vw;\n    color: white;\n    padding: 1vw;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: default; }\n\n.carousel-inner .item .carousel-image {\n  margin: auto;\n  height: 33vw;\n  width: auto;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center; }\n\n.carousel-indicators li {\n  border-color: #ffa3b3; }\n  .carousel-indicators li.active {\n    background-color: #ffa3b3; }\n\n.carousel-fade .carousel-inner .item {\n  opacity: 0;\n  -webkit-transition-property: opacity;\n  transition-property: opacity; }\n\n.carousel-fade .carousel-inner .active {\n  opacity: 1; }\n\n.carousel-fade .carousel-inner .active.left,\n.carousel-fade .carousel-inner .active.right {\n  left: 0;\n  opacity: 0;\n  z-index: 1; }\n\n.carousel-fade .carousel-inner .next.left,\n.carousel-fade .carousel-inner .prev.right {\n  opacity: 1; }\n\n.carousel-fade .carousel-control {\n  z-index: 2; }\n\n/*\n  WHAT IS NEW IN 3.3: \"Added transforms to improve carousel performance in modern browsers.\"\n  Need to override the 3.3 new styles for modern browsers & apply opacity\n*/\n@media all and (transform-3d), (-webkit-transform-3d) {\n  .carousel-fade .carousel-inner > .item.next,\n  .carousel-fade .carousel-inner > .item.active.right {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); }\n  .carousel-fade .carousel-inner > .item.prev,\n  .carousel-fade .carousel-inner > .item.active.left {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); }\n  .carousel-fade .carousel-inner > .item.next.left,\n  .carousel-fade .carousel-inner > .item.prev.right,\n  .carousel-fade .carousel-inner > .item.active {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); } }\n\n.collection-page .ui.cards > .card {\n  border-radius: 0 !important;\n  box-shadow: none !important; }\n  .collection-page .ui.cards > .card .blurring.dimmable > .dimmer {\n    background-color: rgba(255, 163, 179, 0.5); }\n  .collection-page .ui.cards > .card .blurring.dimmed.dimmable > :not(.dimmer) {\n    -webkit-filter: blur(3px);\n            filter: blur(3px); }\n  .collection-page .ui.cards > .card .hover-image {\n    font-size: 2rem;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none; }\n  .collection-page .ui.cards > .card .image {\n    border-radius: 0 !important; }\n  .collection-page .ui.cards > .card .product-images {\n    max-height: 100%;\n    max-width: 100%;\n    height: 250px;\n    width: auto;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center;\n    margin: auto;\n    display: block; }\n\n.ui.form input:not([type]),\n.ui.form input[type=\"date\"],\n.ui.form input[type=\"datetime-local\"],\n.ui.form input[type=\"email\"],\n.ui.form input[type=\"number\"],\n.ui.form input[type=\"password\"],\n.ui.form input[type=\"search\"],\n.ui.form input[type=\"tel\"],\n.ui.form input[type=\"time\"],\n.ui.form input[type=\"text\"],\n.ui.form input[type=\"url\"] {\n  font-family: inherit; }\n\n#payment-container {\n  margin: 0 auto;\n  font-size: 4em;\n  padding-bottom: 3em;\n  padding-left: 12vw;\n  padding-right: 12vw;\n  font-family: cursive; }\n  #payment-container .order-details {\n    margin: 2vw;\n    text-align: center; }\n  #payment-container .ui.form {\n    font-size: 1.2rem; }\n    #payment-container .ui.form .menu > .item {\n      font-size: 1.2rem; }\n    #payment-container .ui.form .field label {\n      font-size: 1.5rem; }\n    #payment-container .ui.form .last-row {\n      position: relative; }\n      #payment-container .ui.form .last-row .ui.checkbox {\n        position: absolute;\n        top: 50%;\n        -webkit-transform: translateY(-50%);\n                transform: translateY(-50%); }\n        #payment-container .ui.form .last-row .ui.checkbox ::before,\n        #payment-container .ui.form .last-row .ui.checkbox ::after {\n          height: 22px;\n          width: 22px;\n          top: 50%;\n          -webkit-transform: translateY(-50%);\n                  transform: translateY(-50%);\n          line-height: 22px; }\n        #payment-container .ui.form .last-row .ui.checkbox label {\n          padding-left: 1.5em; }\n      #payment-container .ui.form .last-row .ui.submit.button {\n        font-family: 'Alex Brush', cursive !important;\n        font-size: 1.5rem;\n        padding: 0.9rem 1.1rem;\n        float: right; }\n\n.contact-page .comment.icon {\n  font-size: 1.5rem;\n  font-weight: 100; }\n\n.ui.center.aligned.header {\n  margin-top: 2rem;\n  font-family: inherit;\n  font-size: 2.5rem;\n  font-weight: 100; }\n\n.ui.horizontal.divider {\n  margin: 2rem;\n  margin-bottom: 2.5rem;\n  color: #ffa3b3; }\n  .ui.horizontal.divider .diamond.icon,\n  .ui.horizontal.divider .comment.outline.icon,\n  .ui.horizontal.divider .edit.icon {\n    font-size: 1.5rem;\n    font-weight: 100; }\n\n.divider.centered {\n  width: 60%;\n  text-align: center;\n  margin: auto;\n  font-size: 1.5rem;\n  letter-spacing: 2.2px;\n  -webkit-transform: scaleY(1.3);\n          transform: scaleY(1.3);\n  padding: 1em 0; }\n  .divider.centered.disclaimer {\n    font-size: 0.9em; }\n\nhtml,\nbody,\n#root {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  line-height: inherit;\n  font-family: 'Alex Brush', cursive !important; }\n\n::-moz-selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* WebKit/Blink Browsers */ }\n\n::selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* WebKit/Blink Browsers */ }\n\n::-moz-selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* Gecko Browsers */ }\n", ""]);
+	exports.push([module.id, "#header .ui.menu {\n  border: none;\n  box-shadow: none;\n  font-family: inherit; }\n  #header .ui.menu .item:hover {\n    background-color: transparent; }\n  #header .ui.menu .item:before {\n    background: none; }\n\n#header #brand-logo {\n  display: inline-block;\n  text-align: center;\n  font-size: 3rem;\n  font-weight: 100;\n  color: #ffa3b3;\n  margin: 0 2rem;\n  padding: 1rem 0;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default;\n  white-space: nowrap; }\n\n#header .navbar .item .nav-option {\n  width: 100%;\n  padding: 0 1rem;\n  text-align: center;\n  cursor: pointer;\n  font-size: 1.7rem;\n  color: #555555;\n  position: relative;\n  top: 0;\n  -webkit-transition: top 0.2s ease, color 0.2s ease;\n  transition: top 0.2s ease, color 0.2s ease; }\n  #header .navbar .item .nav-option:hover {\n    top: -0.25rem;\n    color: #ffa3b3; }\n\n.screenwide-container {\n  width: 100%;\n  height: 32vw;\n  overflow-y: hidden;\n  position: relative;\n  background-size: cover;\n  background-repeat: no-repeat;\n  background-position: center; }\n  .screenwide-container .screenwide-img {\n    width: 100%; }\n  .screenwide-container .screenwide-name {\n    position: absolute;\n    bottom: 0;\n    font-size: 3vw;\n    color: white;\n    padding: 1vw;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: default; }\n\n.carousel-inner .item .carousel-image {\n  margin: auto;\n  min-height: 500px;\n  height: 40vw;\n  width: auto;\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-position: center; }\n\n.carousel-indicators li {\n  border-color: #ffa3b3; }\n  .carousel-indicators li.active {\n    background-color: #ffa3b3; }\n\n.carousel-fade .carousel-inner .item {\n  opacity: 0;\n  -webkit-transition-property: opacity;\n  transition-property: opacity; }\n\n.carousel-fade .carousel-inner .active {\n  opacity: 1; }\n\n.carousel-fade .carousel-inner .active.left,\n.carousel-fade .carousel-inner .active.right {\n  left: 0;\n  opacity: 0;\n  z-index: 1; }\n\n.carousel-fade .carousel-inner .next.left,\n.carousel-fade .carousel-inner .prev.right {\n  opacity: 1; }\n\n.carousel-fade .carousel-control {\n  z-index: 2; }\n\n/*\n  WHAT IS NEW IN 3.3: \"Added transforms to improve carousel performance in modern browsers.\"\n  Need to override the 3.3 new styles for modern browsers & apply opacity\n*/\n@media all and (transform-3d), (-webkit-transform-3d) {\n  .carousel-fade .carousel-inner > .item.next,\n  .carousel-fade .carousel-inner > .item.active.right {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); }\n  .carousel-fade .carousel-inner > .item.prev,\n  .carousel-fade .carousel-inner > .item.active.left {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); }\n  .carousel-fade .carousel-inner > .item.next.left,\n  .carousel-fade .carousel-inner > .item.prev.right,\n  .carousel-fade .carousel-inner > .item.active {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0); } }\n\n.collection-page .ui.cards > .card {\n  border-radius: 0 !important;\n  box-shadow: none !important; }\n  .collection-page .ui.cards > .card .blurring.dimmable > .dimmer {\n    background-color: rgba(255, 163, 179, 0.5); }\n  .collection-page .ui.cards > .card .blurring.dimmed.dimmable > :not(.dimmer) {\n    -webkit-filter: blur(3px);\n            filter: blur(3px); }\n  .collection-page .ui.cards > .card .hover-image {\n    font-size: 2rem;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none; }\n  .collection-page .ui.cards > .card .image {\n    border-radius: 0 !important; }\n  .collection-page .ui.cards > .card .product-images {\n    max-height: 100%;\n    max-width: 100%;\n    height: 250px;\n    width: auto;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center;\n    margin: auto;\n    display: block; }\n\n.order .divider.centered {\n  font-family: 'Tangerine', cursive;\n  font-size: 2em;\n  letter-spacing: 1px;\n  -webkit-transform: none;\n          transform: none; }\n  .order .divider.centered.disclaimer {\n    font-size: 1.5em; }\n\n.ui.form input:not([type]),\n.ui.form input[type=\"date\"],\n.ui.form input[type=\"datetime-local\"],\n.ui.form input[type=\"email\"],\n.ui.form input[type=\"number\"],\n.ui.form input[type=\"password\"],\n.ui.form input[type=\"search\"],\n.ui.form input[type=\"tel\"],\n.ui.form input[type=\"time\"],\n.ui.form input[type=\"text\"],\n.ui.form input[type=\"url\"] {\n  font-family: inherit;\n  line-height: inherit;\n  font-size: 1.6em;\n  padding: 0.11em 0.9em 0.21em 0.9em; }\n\n.ui.selection.dropdown {\n  min-height: 2.2em;\n  font-family: inherit;\n  padding: 0.6em 2.6em 0.5em 1em; }\n\n#payment-container {\n  margin: 0 auto;\n  font-size: 10rem;\n  padding-bottom: 3em;\n  padding-left: 12vw;\n  padding-right: 12vw;\n  font-family: 'Tangerine', cursive;\n  letter-spacing: 1px; }\n  #payment-container .order-details {\n    margin: 2vw;\n    text-align: center; }\n  #payment-container .ui.form {\n    font-size: 1.6rem; }\n    #payment-container .ui.form .menu > .item {\n      font-size: 1.6rem; }\n    #payment-container .ui.form .field label {\n      font-size: 1.8rem; }\n    #payment-container .ui.form .last-row {\n      position: relative; }\n      #payment-container .ui.form .last-row .ui.checkbox {\n        position: absolute;\n        top: 50%;\n        -webkit-transform: translateY(-50%);\n                transform: translateY(-50%); }\n        #payment-container .ui.form .last-row .ui.checkbox ::before,\n        #payment-container .ui.form .last-row .ui.checkbox ::after {\n          height: 22px;\n          width: 22px;\n          top: 50%;\n          -webkit-transform: translateY(-50%);\n                  transform: translateY(-50%);\n          line-height: 22px; }\n        #payment-container .ui.form .last-row .ui.checkbox label {\n          padding-left: 1.5em; }\n      #payment-container .ui.form .last-row .ui.submit.button {\n        font-family: 'Alex Brush', cursive !important;\n        font-size: 1.5rem;\n        padding: 0.9rem 1.1rem;\n        float: right; }\n\n.contact-page .comment.icon {\n  font-size: 1.5rem;\n  font-weight: 100; }\n\n.ui.center.aligned.header {\n  margin-top: 2rem;\n  font-family: inherit;\n  font-size: 2.5rem;\n  font-weight: 100; }\n\n.ui.horizontal.divider {\n  margin: 2rem;\n  margin-bottom: 2.5rem;\n  color: #ffa3b3; }\n  .ui.horizontal.divider .diamond.icon,\n  .ui.horizontal.divider .comment.outline.icon,\n  .ui.horizontal.divider .edit.icon {\n    font-size: 1.5rem;\n    font-weight: 100; }\n\n.divider.centered {\n  width: 60%;\n  text-align: center;\n  margin: auto;\n  font-size: 1.5rem;\n  letter-spacing: 2.2px;\n  -webkit-transform: scaleY(1.3);\n          transform: scaleY(1.3);\n  padding: 1em 0; }\n  .divider.centered.disclaimer {\n    font-size: 0.9em; }\n\nhtml,\nbody,\n#root {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  line-height: inherit;\n  font-family: 'Alex Brush', cursive !important; }\n\n::-moz-selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* WebKit/Blink Browsers */ }\n\n::selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* WebKit/Blink Browsers */ }\n\n::-moz-selection {\n  background: rgba(255, 163, 179, 0.2);\n  /* Gecko Browsers */ }\n", ""]);
 
 	// exports
 
