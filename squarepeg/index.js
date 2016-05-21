@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1daed1e1817e21cf1a5e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d64561725bc32d433723"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -613,15 +613,15 @@
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _Assessments = __webpack_require__(237);
+	var _Assessments = __webpack_require__(238);
 
 	var _Assessments2 = _interopRequireDefault(_Assessments);
 
-	var _Login = __webpack_require__(238);
+	var _Login = __webpack_require__(239);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _Contact = __webpack_require__(239);
+	var _Contact = __webpack_require__(240);
 
 	var _Contact2 = _interopRequireDefault(_Contact);
 
@@ -633,7 +633,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(240);
+	__webpack_require__(241);
 
 	var Index = function (_Component) {
 	  _inherits(Index, _Component);
@@ -888,6 +888,9 @@
 	var queueIndex = -1;
 
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -28690,6 +28693,7 @@
 	 * - **             Consumes (greedy) all characters up to the next character
 	 *                  in the pattern, or to the end of the URL if there is none
 	 *
+	 *  The function calls callback(error, matched) when finished.
 	 * The return value is an object with the following properties:
 	 *
 	 * - remainingPathname
@@ -31492,13 +31496,17 @@
 	  // Only try to match the path if the route actually has a pattern, and if
 	  // we're not just searching for potential nested absolute paths.
 	  if (remainingPathname !== null && pattern) {
-	    var matched = (0, _PatternUtils.matchPattern)(pattern, remainingPathname);
-	    if (matched) {
-	      remainingPathname = matched.remainingPathname;
-	      paramNames = [].concat(paramNames, matched.paramNames);
-	      paramValues = [].concat(paramValues, matched.paramValues);
-	    } else {
-	      remainingPathname = null;
+	    try {
+	      var matched = (0, _PatternUtils.matchPattern)(pattern, remainingPathname);
+	      if (matched) {
+	        remainingPathname = matched.remainingPathname;
+	        paramNames = [].concat(paramNames, matched.paramNames);
+	        paramValues = [].concat(paramValues, matched.paramValues);
+	      } else {
+	        remainingPathname = null;
+	      }
+	    } catch (error) {
+	      callback(error);
 	    }
 
 	    // By assumption, pattern is non-empty here, which is the prerequisite for
@@ -32134,13 +32142,15 @@
 	};
 
 	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-	    var keys = Object.getOwnPropertyNames(sourceComponent);
-	    for (var i=0; i<keys.length; ++i) {
-	        if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
-	            try {
-	                targetComponent[keys[i]] = sourceComponent[keys[i]];
-	            } catch (error) {
+	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+	        var keys = Object.getOwnPropertyNames(sourceComponent);
+	        for (var i=0; i<keys.length; ++i) {
+	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+	                try {
+	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
+	                } catch (error) {
 
+	                }
 	            }
 	        }
 	    }
@@ -33945,6 +33955,10 @@
 
 	var _Charts2 = _interopRequireDefault(_Charts);
 
+	var _PercentageCircle = __webpack_require__(237);
+
+	var _PercentageCircle2 = _interopRequireDefault(_PercentageCircle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33968,7 +33982,29 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Charts2.default, null)
+	        _react2.default.createElement(_Charts2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'center' },
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 41,
+	            color: 'orange' }),
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 34,
+	            color: 'blue' }),
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 45,
+	            color: 'green' }),
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 62,
+	            color: 'purple' }),
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 40,
+	            color: 'yellow' }),
+	          _react2.default.createElement(_PercentageCircle2.default, {
+	            value: 100,
+	            color: 'red' })
+	        )
 	      );
 	    }
 	  }]);
@@ -38073,6 +38109,89 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PercentageCircle = function (_Component) {
+	  _inherits(PercentageCircle, _Component);
+
+	  function PercentageCircle(props) {
+	    _classCallCheck(this, PercentageCircle);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PercentageCircle).call(this, props));
+
+	    _this.value = { percentageValue: 0 };
+	    _this.toValue = props.value;
+	    _this.state = {
+	      value: 0
+	    };
+	    return _this;
+	  }
+
+	  _createClass(PercentageCircle, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      TweenLite.to(this.value, 1, { percentageValue: this.toValue, onUpdate: drawNumber.bind(this) });
+	      function drawNumber() {
+	        var node = _reactDom2.default.findDOMNode(this);
+	        this.setState({ value: Math.floor(this.value.percentageValue) });
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {}
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'c100 p' + this.state.value + ' small ' + this.props.color },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'value' },
+	          this.state.value,
+	          '%'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'slice' },
+	          _react2.default.createElement('div', { className: 'bar' }),
+	          _react2.default.createElement('div', { className: 'fill' })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return PercentageCircle;
+	}(_react.Component);
+
+	exports.default = PercentageCircle;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38119,7 +38238,7 @@
 	exports.default = Assessments;
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38258,7 +38377,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38307,23 +38426,23 @@
 	exports.default = Contact;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(241);
+	var content = __webpack_require__(242);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(243)(content, {});
+	var update = __webpack_require__(244)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(241, function() {
-				var newContent = __webpack_require__(241);
+			module.hot.accept(242, function() {
+				var newContent = __webpack_require__(242);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -38333,21 +38452,21 @@
 	}
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(242)();
+	exports = module.exports = __webpack_require__(243)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".bg-purple,\n.ui.bg-purple {\n  background-color: #9e61ae; }\n\n.purple-color,\n.ui.purple-color {\n  color: #9e61ae !important; }\n\n.bg-green,\n.ui.bg-green {\n  background-color: #3a968c; }\n\n.green-color,\n.ui.green-color {\n  color: #3a968c !important; }\n\n.bg-orange,\n.ui.bg-orange {\n  background-color: #e56a48; }\n\n.orange-color,\n.ui.orange-color {\n  color: #e56a48 !important; }\n\n.bg-yellow,\n.ui.bg-yellow {\n  background-color: #ebd270; }\n\n.yellow-color,\n.ui.yellow-color {\n  color: #ebd270 !important; }\n\n.bg-blue,\n.ui.bg-blue {\n  background-color: #1998b5; }\n\n.blue-color,\n.ui.blue-color {\n  color: #1998b5 !important; }\n\n.bg-red,\n.ui.bg-red {\n  background-color: #ed4747; }\n\n.red-color,\n.ui.red-color {\n  color: #ed4747 !important; }\n\n.ui.main.menu .item {\n  border-left: 0 !important;\n  border-right: 0 !important; }\n\n.ui.main.menu {\n  border: none;\n  box-shadow: none; }\n  .ui.main.menu .item {\n    padding-top: 10px;\n    padding-bottom: 10px; }\n    .ui.main.menu .item:before {\n      width: 0; }\n    .ui.main.menu .item.logo {\n      font-size: 1.4em; }\n      .ui.main.menu .item.logo:hover {\n        background: none; }\n    .ui.main.menu .item.link {\n      font-size: 0.8em;\n      border-bottom: 2px solid transparent;\n      -webkit-transition: border-bottom 0.3s ease;\n      transition: border-bottom 0.3s ease;\n      background: transparent; }\n      .ui.main.menu .item.link:hover {\n        background: transparent;\n        border-bottom: 2px solid; }\n\n.ui.menu .dropdown.item .menu {\n  margin-top: 3px; }\n\n.home .first-block {\n  padding: 5em;\n  color: white; }\n\n.home .second-block,\n.home .third-block {\n  padding: 3em 2em; }\n\n.home .third-block {\n  color: #e6e6e6; }\n  .home .third-block .section-header {\n    color: white; }\n\n.home .block-header {\n  color: #ebd270;\n  padding-bottom: 2em; }\n\n.ui.segment.login-block {\n  padding: 2em; }\n\n.input-title {\n  font-size: 1.4em; }\n\n.input-block {\n  margin-top: 2em;\n  margin-bottom: 2em;\n  min-width: 20em; }\n\n.ui.basic.blue.button:hover {\n  background-color: #1678c2 !important;\n  color: #ffffff !important; }\n\n.ui.basic.green.button:hover {\n  background-color: #21ba45 !important;\n  color: #ffffff !important; }\n\nhtml,\nbody,\n#root,\n#main,\n.full {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  font-family: 'Open Sans', sans-serif !important; }\n\n*:not(.icon) {\n  font-family: 'Open Sans', sans-serif !important; }\n\n.text-center, .title {\n  text-align: center; }\n\n.title {\n  font-size: 4em; }\n\n.center {\n  display: table;\n  margin: 0 auto; }\n\n.absolute-center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n\n.no-click {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default; }\n\n.screenwide {\n  width: 100%;\n  height: 200px; }\n\n.header-padding {\n  padding-top: 58px;\n  height: 100%; }\n", ""]);
+	exports.push([module.id, ".bg-purple,\n.ui.bg-purple {\n  background-color: #9e61ae; }\n\n.purple-color,\n.ui.purple-color {\n  color: #9e61ae !important; }\n\n.bg-green,\n.ui.bg-green {\n  background-color: #3a968c; }\n\n.green-color,\n.ui.green-color {\n  color: #3a968c !important; }\n\n.bg-orange,\n.ui.bg-orange {\n  background-color: #e56a48; }\n\n.orange-color,\n.ui.orange-color {\n  color: #e56a48 !important; }\n\n.bg-yellow,\n.ui.bg-yellow {\n  background-color: #ebd270; }\n\n.yellow-color,\n.ui.yellow-color {\n  color: #ebd270 !important; }\n\n.bg-blue,\n.ui.bg-blue {\n  background-color: #1998b5; }\n\n.blue-color,\n.ui.blue-color {\n  color: #1998b5 !important; }\n\n.bg-red,\n.ui.bg-red {\n  background-color: #ed4747; }\n\n.red-color,\n.ui.red-color {\n  color: #ed4747 !important; }\n\n.ui.main.menu .item {\n  border-left: 0 !important;\n  border-right: 0 !important; }\n\n.ui.main.menu {\n  border: none;\n  box-shadow: none; }\n  .ui.main.menu .item {\n    padding-top: 10px;\n    padding-bottom: 10px; }\n    .ui.main.menu .item:before {\n      width: 0; }\n    .ui.main.menu .item.logo {\n      font-size: 1.4em; }\n      .ui.main.menu .item.logo:hover {\n        background: none; }\n    .ui.main.menu .item.link {\n      font-size: 0.8em;\n      border-bottom: 2px solid transparent;\n      -webkit-transition: border-bottom 0.3s ease;\n      transition: border-bottom 0.3s ease;\n      background: transparent; }\n      .ui.main.menu .item.link:hover {\n        background: transparent;\n        border-bottom: 2px solid; }\n\n.ui.menu .dropdown.item .menu {\n  margin-top: 3px; }\n\n.home .first-block {\n  padding: 5em;\n  color: white; }\n\n.home .second-block,\n.home .third-block {\n  padding: 3em 2em; }\n\n.home .third-block {\n  color: #e6e6e6; }\n  .home .third-block .section-header {\n    color: white; }\n\n.home .block-header {\n  color: #ebd270;\n  padding-bottom: 2em; }\n\n.ui.segment.login-block {\n  padding: 2em; }\n\n.input-title {\n  font-size: 1.4em; }\n\n.input-block {\n  margin-top: 2em;\n  margin-bottom: 2em;\n  min-width: 20em; }\n\n.ui.basic.blue.button:hover {\n  background-color: #1678c2 !important;\n  color: #ffffff !important; }\n\n.ui.basic.green.button:hover {\n  background-color: #21ba45 !important;\n  color: #ffffff !important; }\n\n/****************************************************************\r\n *\r\n * CSS Percentage Circle\r\n * Author: Andre Firchow\r\n *\r\n*****************************************************************/\n.rect-auto, .c100.p51 .slice, .c100.p52 .slice, .c100.p53 .slice, .c100.p54 .slice, .c100.p55 .slice, .c100.p56 .slice, .c100.p57 .slice, .c100.p58 .slice, .c100.p59 .slice, .c100.p60 .slice, .c100.p61 .slice, .c100.p62 .slice, .c100.p63 .slice, .c100.p64 .slice, .c100.p65 .slice, .c100.p66 .slice, .c100.p67 .slice, .c100.p68 .slice, .c100.p69 .slice, .c100.p70 .slice, .c100.p71 .slice, .c100.p72 .slice, .c100.p73 .slice, .c100.p74 .slice, .c100.p75 .slice, .c100.p76 .slice, .c100.p77 .slice, .c100.p78 .slice, .c100.p79 .slice, .c100.p80 .slice, .c100.p81 .slice, .c100.p82 .slice, .c100.p83 .slice, .c100.p84 .slice, .c100.p85 .slice, .c100.p86 .slice, .c100.p87 .slice, .c100.p88 .slice, .c100.p89 .slice, .c100.p90 .slice, .c100.p91 .slice, .c100.p92 .slice, .c100.p93 .slice, .c100.p94 .slice, .c100.p95 .slice, .c100.p96 .slice, .c100.p97 .slice, .c100.p98 .slice, .c100.p99 .slice, .c100.p100 .slice {\n  clip: rect(auto, auto, auto, auto); }\n\n.pie, .c100 .bar, .c100.p51 .fill, .c100.p52 .fill, .c100.p53 .fill, .c100.p54 .fill, .c100.p55 .fill, .c100.p56 .fill, .c100.p57 .fill, .c100.p58 .fill, .c100.p59 .fill, .c100.p60 .fill, .c100.p61 .fill, .c100.p62 .fill, .c100.p63 .fill, .c100.p64 .fill, .c100.p65 .fill, .c100.p66 .fill, .c100.p67 .fill, .c100.p68 .fill, .c100.p69 .fill, .c100.p70 .fill, .c100.p71 .fill, .c100.p72 .fill, .c100.p73 .fill, .c100.p74 .fill, .c100.p75 .fill, .c100.p76 .fill, .c100.p77 .fill, .c100.p78 .fill, .c100.p79 .fill, .c100.p80 .fill, .c100.p81 .fill, .c100.p82 .fill, .c100.p83 .fill, .c100.p84 .fill, .c100.p85 .fill, .c100.p86 .fill, .c100.p87 .fill, .c100.p88 .fill, .c100.p89 .fill, .c100.p90 .fill, .c100.p91 .fill, .c100.p92 .fill, .c100.p93 .fill, .c100.p94 .fill, .c100.p95 .fill, .c100.p96 .fill, .c100.p97 .fill, .c100.p98 .fill, .c100.p99 .fill, .c100.p100 .fill {\n  position: absolute;\n  border: 0.08em solid #307bbb;\n  width: 0.84em;\n  height: 0.84em;\n  clip: rect(0em, 0.5em, 1em, 0em);\n  border-radius: 50%;\n  -webkit-transform: rotate(0deg);\n  transform: rotate(0deg); }\n\n.pie-fill, .c100.p51 .bar:after, .c100.p51 .fill, .c100.p52 .bar:after, .c100.p52 .fill, .c100.p53 .bar:after, .c100.p53 .fill, .c100.p54 .bar:after, .c100.p54 .fill, .c100.p55 .bar:after, .c100.p55 .fill, .c100.p56 .bar:after, .c100.p56 .fill, .c100.p57 .bar:after, .c100.p57 .fill, .c100.p58 .bar:after, .c100.p58 .fill, .c100.p59 .bar:after, .c100.p59 .fill, .c100.p60 .bar:after, .c100.p60 .fill, .c100.p61 .bar:after, .c100.p61 .fill, .c100.p62 .bar:after, .c100.p62 .fill, .c100.p63 .bar:after, .c100.p63 .fill, .c100.p64 .bar:after, .c100.p64 .fill, .c100.p65 .bar:after, .c100.p65 .fill, .c100.p66 .bar:after, .c100.p66 .fill, .c100.p67 .bar:after, .c100.p67 .fill, .c100.p68 .bar:after, .c100.p68 .fill, .c100.p69 .bar:after, .c100.p69 .fill, .c100.p70 .bar:after, .c100.p70 .fill, .c100.p71 .bar:after, .c100.p71 .fill, .c100.p72 .bar:after, .c100.p72 .fill, .c100.p73 .bar:after, .c100.p73 .fill, .c100.p74 .bar:after, .c100.p74 .fill, .c100.p75 .bar:after, .c100.p75 .fill, .c100.p76 .bar:after, .c100.p76 .fill, .c100.p77 .bar:after, .c100.p77 .fill, .c100.p78 .bar:after, .c100.p78 .fill, .c100.p79 .bar:after, .c100.p79 .fill, .c100.p80 .bar:after, .c100.p80 .fill, .c100.p81 .bar:after, .c100.p81 .fill, .c100.p82 .bar:after, .c100.p82 .fill, .c100.p83 .bar:after, .c100.p83 .fill, .c100.p84 .bar:after, .c100.p84 .fill, .c100.p85 .bar:after, .c100.p85 .fill, .c100.p86 .bar:after, .c100.p86 .fill, .c100.p87 .bar:after, .c100.p87 .fill, .c100.p88 .bar:after, .c100.p88 .fill, .c100.p89 .bar:after, .c100.p89 .fill, .c100.p90 .bar:after, .c100.p90 .fill, .c100.p91 .bar:after, .c100.p91 .fill, .c100.p92 .bar:after, .c100.p92 .fill, .c100.p93 .bar:after, .c100.p93 .fill, .c100.p94 .bar:after, .c100.p94 .fill, .c100.p95 .bar:after, .c100.p95 .fill, .c100.p96 .bar:after, .c100.p96 .fill, .c100.p97 .bar:after, .c100.p97 .fill, .c100.p98 .bar:after, .c100.p98 .fill, .c100.p99 .bar:after, .c100.p99 .fill, .c100.p100 .bar:after, .c100.p100 .fill {\n  -webkit-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.c100 {\n  position: relative;\n  font-size: 120px;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  float: left;\n  margin: 0 0.1em 0.1em 0;\n  background-color: #cccccc; }\n\n.c100 *, .c100 *:before, .c100 *:after {\n  box-sizing: content-box; }\n\n.c100.center {\n  float: none;\n  margin: 0 auto; }\n\n.c100.big {\n  font-size: 240px; }\n\n.c100.small {\n  font-size: 80px; }\n\n.c100 > span {\n  position: absolute;\n  width: 100%;\n  z-index: 1;\n  left: 0;\n  top: 0;\n  width: 5em;\n  line-height: 5em;\n  font-size: 0.2em;\n  color: #cccccc;\n  display: block;\n  text-align: center;\n  white-space: nowrap;\n  -webkit-transition-property: all;\n  transition-property: all;\n  -webkit-transition-duration: 0.2s;\n  transition-duration: 0.2s;\n  -webkit-transition-timing-function: ease-out;\n  transition-timing-function: ease-out; }\n\n.c100:after {\n  position: absolute;\n  top: 0.08em;\n  left: 0.08em;\n  display: block;\n  content: \" \";\n  border-radius: 50%;\n  background-color: whitesmoke;\n  width: 0.84em;\n  height: 0.84em;\n  -webkit-transition-property: all;\n  transition-property: all;\n  -webkit-transition-duration: 0.2s;\n  transition-duration: 0.2s;\n  -webkit-transition-timing-function: ease-in;\n  transition-timing-function: ease-in; }\n\n.c100 .slice {\n  position: absolute;\n  width: 1em;\n  height: 1em;\n  clip: rect(0em, 1em, 1em, 0.5em); }\n\n.c100.p1 .bar {\n  -webkit-transform: rotate(3.6deg);\n  transform: rotate(3.6deg); }\n\n.c100.p2 .bar {\n  -webkit-transform: rotate(7.2deg);\n  transform: rotate(7.2deg); }\n\n.c100.p3 .bar {\n  -webkit-transform: rotate(10.8deg);\n  transform: rotate(10.8deg); }\n\n.c100.p4 .bar {\n  -webkit-transform: rotate(14.4deg);\n  transform: rotate(14.4deg); }\n\n.c100.p5 .bar {\n  -webkit-transform: rotate(18deg);\n  transform: rotate(18deg); }\n\n.c100.p6 .bar {\n  -webkit-transform: rotate(21.6deg);\n  transform: rotate(21.6deg); }\n\n.c100.p7 .bar {\n  -webkit-transform: rotate(25.2deg);\n  transform: rotate(25.2deg); }\n\n.c100.p8 .bar {\n  -webkit-transform: rotate(28.8deg);\n  transform: rotate(28.8deg); }\n\n.c100.p9 .bar {\n  -webkit-transform: rotate(32.4deg);\n  transform: rotate(32.4deg); }\n\n.c100.p10 .bar {\n  -webkit-transform: rotate(36deg);\n  transform: rotate(36deg); }\n\n.c100.p11 .bar {\n  -webkit-transform: rotate(39.6deg);\n  transform: rotate(39.6deg); }\n\n.c100.p12 .bar {\n  -webkit-transform: rotate(43.2deg);\n  transform: rotate(43.2deg); }\n\n.c100.p13 .bar {\n  -webkit-transform: rotate(46.8deg);\n  transform: rotate(46.8deg); }\n\n.c100.p14 .bar {\n  -webkit-transform: rotate(50.4deg);\n  transform: rotate(50.4deg); }\n\n.c100.p15 .bar {\n  -webkit-transform: rotate(54deg);\n  transform: rotate(54deg); }\n\n.c100.p16 .bar {\n  -webkit-transform: rotate(57.6deg);\n  transform: rotate(57.6deg); }\n\n.c100.p17 .bar {\n  -webkit-transform: rotate(61.2deg);\n  transform: rotate(61.2deg); }\n\n.c100.p18 .bar {\n  -webkit-transform: rotate(64.8deg);\n  transform: rotate(64.8deg); }\n\n.c100.p19 .bar {\n  -webkit-transform: rotate(68.4deg);\n  transform: rotate(68.4deg); }\n\n.c100.p20 .bar {\n  -webkit-transform: rotate(72deg);\n  transform: rotate(72deg); }\n\n.c100.p21 .bar {\n  -webkit-transform: rotate(75.6deg);\n  transform: rotate(75.6deg); }\n\n.c100.p22 .bar {\n  -webkit-transform: rotate(79.2deg);\n  transform: rotate(79.2deg); }\n\n.c100.p23 .bar {\n  -webkit-transform: rotate(82.8deg);\n  transform: rotate(82.8deg); }\n\n.c100.p24 .bar {\n  -webkit-transform: rotate(86.4deg);\n  transform: rotate(86.4deg); }\n\n.c100.p25 .bar {\n  -webkit-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.c100.p26 .bar {\n  -webkit-transform: rotate(93.6deg);\n  transform: rotate(93.6deg); }\n\n.c100.p27 .bar {\n  -webkit-transform: rotate(97.2deg);\n  transform: rotate(97.2deg); }\n\n.c100.p28 .bar {\n  -webkit-transform: rotate(100.8deg);\n  transform: rotate(100.8deg); }\n\n.c100.p29 .bar {\n  -webkit-transform: rotate(104.4deg);\n  transform: rotate(104.4deg); }\n\n.c100.p30 .bar {\n  -webkit-transform: rotate(108deg);\n  transform: rotate(108deg); }\n\n.c100.p31 .bar {\n  -webkit-transform: rotate(111.6deg);\n  transform: rotate(111.6deg); }\n\n.c100.p32 .bar {\n  -webkit-transform: rotate(115.2deg);\n  transform: rotate(115.2deg); }\n\n.c100.p33 .bar {\n  -webkit-transform: rotate(118.8deg);\n  transform: rotate(118.8deg); }\n\n.c100.p34 .bar {\n  -webkit-transform: rotate(122.4deg);\n  transform: rotate(122.4deg); }\n\n.c100.p35 .bar {\n  -webkit-transform: rotate(126deg);\n  transform: rotate(126deg); }\n\n.c100.p36 .bar {\n  -webkit-transform: rotate(129.6deg);\n  transform: rotate(129.6deg); }\n\n.c100.p37 .bar {\n  -webkit-transform: rotate(133.2deg);\n  transform: rotate(133.2deg); }\n\n.c100.p38 .bar {\n  -webkit-transform: rotate(136.8deg);\n  transform: rotate(136.8deg); }\n\n.c100.p39 .bar {\n  -webkit-transform: rotate(140.4deg);\n  transform: rotate(140.4deg); }\n\n.c100.p40 .bar {\n  -webkit-transform: rotate(144deg);\n  transform: rotate(144deg); }\n\n.c100.p41 .bar {\n  -webkit-transform: rotate(147.6deg);\n  transform: rotate(147.6deg); }\n\n.c100.p42 .bar {\n  -webkit-transform: rotate(151.2deg);\n  transform: rotate(151.2deg); }\n\n.c100.p43 .bar {\n  -webkit-transform: rotate(154.8deg);\n  transform: rotate(154.8deg); }\n\n.c100.p44 .bar {\n  -webkit-transform: rotate(158.4deg);\n  transform: rotate(158.4deg); }\n\n.c100.p45 .bar {\n  -webkit-transform: rotate(162deg);\n  transform: rotate(162deg); }\n\n.c100.p46 .bar {\n  -webkit-transform: rotate(165.6deg);\n  transform: rotate(165.6deg); }\n\n.c100.p47 .bar {\n  -webkit-transform: rotate(169.2deg);\n  transform: rotate(169.2deg); }\n\n.c100.p48 .bar {\n  -webkit-transform: rotate(172.8deg);\n  transform: rotate(172.8deg); }\n\n.c100.p49 .bar {\n  -webkit-transform: rotate(176.4deg);\n  transform: rotate(176.4deg); }\n\n.c100.p50 .bar {\n  -webkit-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.c100.p51 .bar {\n  -webkit-transform: rotate(183.6deg);\n  transform: rotate(183.6deg); }\n\n.c100.p52 .bar {\n  -webkit-transform: rotate(187.2deg);\n  transform: rotate(187.2deg); }\n\n.c100.p53 .bar {\n  -webkit-transform: rotate(190.8deg);\n  transform: rotate(190.8deg); }\n\n.c100.p54 .bar {\n  -webkit-transform: rotate(194.4deg);\n  transform: rotate(194.4deg); }\n\n.c100.p55 .bar {\n  -webkit-transform: rotate(198deg);\n  transform: rotate(198deg); }\n\n.c100.p56 .bar {\n  -webkit-transform: rotate(201.6deg);\n  transform: rotate(201.6deg); }\n\n.c100.p57 .bar {\n  -webkit-transform: rotate(205.2deg);\n  transform: rotate(205.2deg); }\n\n.c100.p58 .bar {\n  -webkit-transform: rotate(208.8deg);\n  transform: rotate(208.8deg); }\n\n.c100.p59 .bar {\n  -webkit-transform: rotate(212.4deg);\n  transform: rotate(212.4deg); }\n\n.c100.p60 .bar {\n  -webkit-transform: rotate(216deg);\n  transform: rotate(216deg); }\n\n.c100.p61 .bar {\n  -webkit-transform: rotate(219.6deg);\n  transform: rotate(219.6deg); }\n\n.c100.p62 .bar {\n  -webkit-transform: rotate(223.2deg);\n  transform: rotate(223.2deg); }\n\n.c100.p63 .bar {\n  -webkit-transform: rotate(226.8deg);\n  transform: rotate(226.8deg); }\n\n.c100.p64 .bar {\n  -webkit-transform: rotate(230.4deg);\n  transform: rotate(230.4deg); }\n\n.c100.p65 .bar {\n  -webkit-transform: rotate(234deg);\n  transform: rotate(234deg); }\n\n.c100.p66 .bar {\n  -webkit-transform: rotate(237.6deg);\n  transform: rotate(237.6deg); }\n\n.c100.p67 .bar {\n  -webkit-transform: rotate(241.2deg);\n  transform: rotate(241.2deg); }\n\n.c100.p68 .bar {\n  -webkit-transform: rotate(244.8deg);\n  transform: rotate(244.8deg); }\n\n.c100.p69 .bar {\n  -webkit-transform: rotate(248.4deg);\n  transform: rotate(248.4deg); }\n\n.c100.p70 .bar {\n  -webkit-transform: rotate(252deg);\n  transform: rotate(252deg); }\n\n.c100.p71 .bar {\n  -webkit-transform: rotate(255.6deg);\n  transform: rotate(255.6deg); }\n\n.c100.p72 .bar {\n  -webkit-transform: rotate(259.2deg);\n  transform: rotate(259.2deg); }\n\n.c100.p73 .bar {\n  -webkit-transform: rotate(262.8deg);\n  transform: rotate(262.8deg); }\n\n.c100.p74 .bar {\n  -webkit-transform: rotate(266.4deg);\n  transform: rotate(266.4deg); }\n\n.c100.p75 .bar {\n  -webkit-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.c100.p76 .bar {\n  -webkit-transform: rotate(273.6deg);\n  transform: rotate(273.6deg); }\n\n.c100.p77 .bar {\n  -webkit-transform: rotate(277.2deg);\n  transform: rotate(277.2deg); }\n\n.c100.p78 .bar {\n  -webkit-transform: rotate(280.8deg);\n  transform: rotate(280.8deg); }\n\n.c100.p79 .bar {\n  -webkit-transform: rotate(284.4deg);\n  transform: rotate(284.4deg); }\n\n.c100.p80 .bar {\n  -webkit-transform: rotate(288deg);\n  transform: rotate(288deg); }\n\n.c100.p81 .bar {\n  -webkit-transform: rotate(291.6deg);\n  transform: rotate(291.6deg); }\n\n.c100.p82 .bar {\n  -webkit-transform: rotate(295.2deg);\n  transform: rotate(295.2deg); }\n\n.c100.p83 .bar {\n  -webkit-transform: rotate(298.8deg);\n  transform: rotate(298.8deg); }\n\n.c100.p84 .bar {\n  -webkit-transform: rotate(302.4deg);\n  transform: rotate(302.4deg); }\n\n.c100.p85 .bar {\n  -webkit-transform: rotate(306deg);\n  transform: rotate(306deg); }\n\n.c100.p86 .bar {\n  -webkit-transform: rotate(309.6deg);\n  transform: rotate(309.6deg); }\n\n.c100.p87 .bar {\n  -webkit-transform: rotate(313.2deg);\n  transform: rotate(313.2deg); }\n\n.c100.p88 .bar {\n  -webkit-transform: rotate(316.8deg);\n  transform: rotate(316.8deg); }\n\n.c100.p89 .bar {\n  -webkit-transform: rotate(320.4deg);\n  transform: rotate(320.4deg); }\n\n.c100.p90 .bar {\n  -webkit-transform: rotate(324deg);\n  transform: rotate(324deg); }\n\n.c100.p91 .bar {\n  -webkit-transform: rotate(327.6deg);\n  transform: rotate(327.6deg); }\n\n.c100.p92 .bar {\n  -webkit-transform: rotate(331.2deg);\n  transform: rotate(331.2deg); }\n\n.c100.p93 .bar {\n  -webkit-transform: rotate(334.8deg);\n  transform: rotate(334.8deg); }\n\n.c100.p94 .bar {\n  -webkit-transform: rotate(338.4deg);\n  transform: rotate(338.4deg); }\n\n.c100.p95 .bar {\n  -webkit-transform: rotate(342deg);\n  transform: rotate(342deg); }\n\n.c100.p96 .bar {\n  -webkit-transform: rotate(345.6deg);\n  transform: rotate(345.6deg); }\n\n.c100.p97 .bar {\n  -webkit-transform: rotate(349.2deg);\n  transform: rotate(349.2deg); }\n\n.c100.p98 .bar {\n  -webkit-transform: rotate(352.8deg);\n  transform: rotate(352.8deg); }\n\n.c100.p99 .bar {\n  -webkit-transform: rotate(356.4deg);\n  transform: rotate(356.4deg); }\n\n.c100.p100 .bar {\n  -webkit-transform: rotate(360deg);\n  transform: rotate(360deg); }\n\n.c100:hover {\n  cursor: default; }\n\n.c100:hover > span {\n  width: 3.33em;\n  line-height: 3.33em;\n  font-size: 0.3em;\n  color: #307bbb; }\n\n.c100:hover:after {\n  top: 0.04em;\n  left: 0.04em;\n  width: 0.92em;\n  height: 0.92em; }\n\n.c100.dark {\n  background-color: #777777; }\n\n.c100.dark .bar,\n.c100.dark .fill {\n  border-color: #c6ff00 !important; }\n\n.c100.dark > span {\n  color: #777777; }\n\n.c100.dark:after {\n  background-color: #666666; }\n\n.c100.dark:hover > span {\n  color: #c6ff00; }\n\n.c100.green .bar, .c100.green .fill {\n  border-color: #3a968c !important; }\n\n.c100.green:hover > span {\n  color: #3a968c; }\n\n.c100.green.dark .bar, .c100.green.dark .fill {\n  border-color: #3a968c !important; }\n\n.c100.green.dark:hover > span {\n  color: #3a968c; }\n\n.c100.blue .bar, .c100.blue .fill {\n  border-color: #1998b5 !important; }\n\n.c100.blue:hover > span {\n  color: #1998b5; }\n\n.c100.blue.dark .bar, .c100.blue.dark .fill {\n  border-color: #1998b5 !important; }\n\n.c100.blue.dark:hover > span {\n  color: #1998b5; }\n\n.c100.red .bar, .c100.red .fill {\n  border-color: #ed4747 !important; }\n\n.c100.red:hover > span {\n  color: #ed4747; }\n\n.c100.red.dark .bar, .c100.red.dark .fill {\n  border-color: #ed4747 !important; }\n\n.c100.red.dark:hover > span {\n  color: #ed4747; }\n\n.c100.purple .bar, .c100.purple .fill {\n  border-color: #9e61ae !important; }\n\n.c100.purple:hover > span {\n  color: #9e61ae; }\n\n.c100.purple.dark .bar, .c100.purple.dark .fill {\n  border-color: #9e61ae !important; }\n\n.c100.purple.dark:hover > span {\n  color: #9e61ae; }\n\n.c100.yellow .bar, .c100.yellow .fill {\n  border-color: #ebd270 !important; }\n\n.c100.yellow:hover > span {\n  color: #ebd270; }\n\n.c100.yellow.dark .bar, .c100.yellow.dark .fill {\n  border-color: #ebd270 !important; }\n\n.c100.yellow.dark:hover > span {\n  color: #ebd270; }\n\n.c100.orange .bar, .c100.orange .fill {\n  border-color: #e56a48 !important; }\n\n.c100.orange:hover > span {\n  color: #e56a48; }\n\n.c100.orange.dark .bar, .c100.orange.dark .fill {\n  border-color: #e56a48 !important; }\n\n.c100.orange.dark:hover > span {\n  color: #e56a48; }\n\nhtml,\nbody,\n#root,\n#main,\n.full {\n  height: 100%;\n  width: 100%;\n  margin: 0;\n  font-family: 'Open Sans', sans-serif !important; }\n\n*:not(.icon) {\n  font-family: 'Open Sans', sans-serif !important; }\n\n.text-center, .title {\n  text-align: center; }\n\n.title {\n  font-size: 4em; }\n\n.center {\n  display: table;\n  margin: 0 auto; }\n\n.absolute-center {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%); }\n\n.no-click {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default; }\n\n.screenwide {\n  width: 100%;\n  height: 200px; }\n\n.header-padding {\n  padding-top: 58px;\n  height: 100%; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/*
@@ -38403,7 +38522,7 @@
 
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
