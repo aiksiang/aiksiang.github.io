@@ -1,7 +1,7 @@
 [
     {
-      'action' => 'talk',
-      'voiceName' => 'Russell',
-      'text' => 'satu, dua, tiga, umpat, lima, enam, tujuh, delapan, sembilan, nol'
+      "action": "talk",
+      "voiceName": "Russell",
+      "text": "satu, dua, tiga, umpat, lima, enam, tujuh, delapan, sembilan, nol"
     }
-  ]
+]
