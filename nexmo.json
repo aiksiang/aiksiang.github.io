@@ -2,6 +2,11 @@
     {
       "action": "talk",
       "voiceName": "Russell",
-      "text": "satu, saatuu, dua, duua, tigga, umpat, lima, ernaam, tujuh, thelapaan, cembilan, nol"
+      "text": "satu, dua, tigga, umpat, lima, ernaam, tujuh, thelapaan, cembilan, nol"
+    },
+    {
+      "action": "talk",
+      "voiceName": "Russell",
+      "text": "delapan, delapaan, derlapan, the-lah-parn"
     }
 ]
