@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "16c56cbff6ce2911f22e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6d76c1e13f79ca0dbcb5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -650,12 +650,12 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: Index },
-	    _react2.default.createElement(IndexRoute, { component: Index })
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: Index })
 	  ),
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/cadenceco/', component: Index },
-	    _react2.default.createElement(IndexRoute, { component: Index })
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: Index })
 	  )
 	), document.getElementById('root'));
 
