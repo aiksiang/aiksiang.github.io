@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "da9378d98accf476529a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d89038c5816df8ba676d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -601,6 +601,10 @@
 
 	var _reactRouter = __webpack_require__(160);
 
+	var _introduction = __webpack_require__(223);
+
+	var _introduction2 = _interopRequireDefault(_introduction);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -609,22 +613,34 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(223);
+	__webpack_require__(231);
 
 	var Index = function (_Component) {
 	  _inherits(Index, _Component);
 
-	  function Index() {
+	  function Index(props) {
 	    _classCallCheck(this, Index);
 
-	    return _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Index.__proto__ || Object.getPrototypeOf(Index)).call(this, props));
+
+	    _this.state = {
+	      titleIsLoading: true
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Index, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var node = _reactDom2.default.findDOMNode(this);
-	      _gsap2.default.from(node, 1, { y: -0, opacity: 0, rotationX: 135, transformOrigin: "top 100% -50" });
+	      var node = _reactDom2.default.findDOMNode(this.refs.title);
+	      _gsap2.default.from(node, 1, { y: -20, opacity: 0, onComplete: this.startIntro.bind(this) });
+	    }
+	  }, {
+	    key: 'startIntro',
+	    value: function startIntro() {
+	      this.setState({
+	        titleIsLoading: false
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -634,9 +650,12 @@
 	        null,
 	        _react2.default.createElement(
 	          'h1',
-	          { className: 'title' },
+	          { ref: 'title', className: 'title' },
 	          'Hello, I\'m Aik Siang'
-	        )
+	        ),
+	        _react2.default.createElement(_introduction2.default, {
+	          visible: !this.state.titleIsLoading
+	        })
 	      );
 	    }
 	  }]);
@@ -33981,20 +34000,191 @@
 /* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _gsap = __webpack_require__(159);
+
+	var _gsap2 = _interopRequireDefault(_gsap);
+
+	var _typewriting = __webpack_require__(224);
+
+	var _typewriting2 = _interopRequireDefault(_typewriting);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(229);
+
+	var Introduction = function (_Component) {
+	  _inherits(Introduction, _Component);
+
+	  function Introduction(props) {
+	    _classCallCheck(this, Introduction);
+
+	    var _this = _possibleConstructorReturn(this, (Introduction.__proto__ || Object.getPrototypeOf(Introduction)).call(this, props));
+
+	    _this.blinker = null;
+	    _this.state = {
+	      startTyping: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Introduction, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.blinker = _reactDom2.default.findDOMNode(this.refs.blinker);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (!nextProps.visible) {
+	        return;
+	      }
+	      _gsap2.default.to(this.blinker, 0.4, { opacity: 1, repeat: -1, yoyo: true });
+	      setTimeout(function () {
+	        this.setState({ startTyping: true });
+	      }.bind(this), 1500);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'introduction', ref: 'introduction' },
+	        _react2.default.createElement(_typewriting2.default, {
+	          visible: this.state.startTyping
+	        }),
+	        _react2.default.createElement(
+	          'span',
+	          { id: 'blinker', ref: 'blinker' },
+	          '|'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Introduction;
+	}(_react.Component);
+
+	exports.default = Introduction;
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _gsap = __webpack_require__(159);
+
+	var _gsap2 = _interopRequireDefault(_gsap);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(225);
+
+	var Typewriting = function (_Component) {
+	  _inherits(Typewriting, _Component);
+
+	  function Typewriting(props) {
+	    _classCallCheck(this, Typewriting);
+
+	    var _this = _possibleConstructorReturn(this, (Typewriting.__proto__ || Object.getPrototypeOf(Typewriting)).call(this, props));
+
+	    _this.state = {
+	      currentText: ""
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Typewriting, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.text = _reactDom2.default.findDOMNode(this.refs.typewriting);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (!nextProps.visible) {
+	        return;
+	      }
+	      this.setState({
+	        currentText: "I Code"
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'typewriting', ref: 'typewriting' },
+	        this.state.currentText
+	      );
+	    }
+	  }]);
+
+	  return Typewriting;
+	}(_react.Component);
+
+	exports.default = Typewriting;
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(224);
+	var content = __webpack_require__(226);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(226)(content, {});
+	var update = __webpack_require__(228)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(224, function() {
-				var newContent = __webpack_require__(224);
+			module.hot.accept(226, function() {
+				var newContent = __webpack_require__(226);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -34004,21 +34194,21 @@
 	}
 
 /***/ }),
-/* 224 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(225)();
+	exports = module.exports = __webpack_require__(227)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "html,\nbody {\n  height: 100%;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n  color: white;\n  background: rgba(0, 0, 0, 0.6);\n  font-family: 'Quicksand', sans-serif;\n  font-weight: lighter; }\n\nh1, h2, h3, h4, h5 {\n  font-family: 'Quicksand', sans-serif;\n  font-weight: lighter; }\n\n.title {\n  text-align: center;\n  font-size: 4em; }\n", ""]);
+	exports.push([module.id, "#typewriting {\n  display: inline-block; }\n", ""]);
 
 	// exports
 
 
 /***/ }),
-/* 225 */
+/* 227 */
 /***/ (function(module, exports) {
 
 	/*
@@ -34074,7 +34264,7 @@
 
 
 /***/ }),
-/* 226 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -34323,6 +34513,86 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(230);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(228)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(230, function() {
+				var newContent = __webpack_require__(230);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(227)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#introduction {\n  font-size: 3rem;\n  text-align: center; }\n  #introduction #blinker {\n    opacity: 0;\n    display: inline-block;\n    margin: 0 2px; }\n", ""]);
+
+	// exports
+
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(232);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(228)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(232, function() {
+				var newContent = __webpack_require__(232);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(227)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "html,\nbody {\n  height: 100%;\n  width: 100%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0;\n  color: white;\n  background: rgba(0, 0, 0, 0.6);\n  font-family: 'Quicksand', sans-serif;\n  font-weight: lighter; }\n\nh1, h2, h3, h4, h5 {\n  font-family: 'Quicksand', sans-serif;\n  font-weight: lighter; }\n\n.title {\n  text-align: center;\n  font-size: 4rem; }\n", ""]);
+
+	// exports
 
 
 /***/ })
