@@ -2,11 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/miles-tracker/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Miles Tracker" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>miles-tracker</title>
-    <script type="module" crossorigin src="/miles-tracker/assets/index-BOEeFXhb.js"></script>
-    <link rel="stylesheet" crossorigin href="/miles-tracker/assets/index-dyVfkPCz.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    // Stale cached index.html after a new deployment can reference JS chunks
+    // that no longer exist. Must be inline (before bundle loads) so it catches
+    // 404s that would prevent the bundle from running at all.
+    window.addEventListener('error', function(e) {
+      if (e.target instanceof HTMLScriptElement) {
+        window.location.replace(window.location.href);
+      }
+    }, true);
+  </script>
+  <script>
+    document.addEventListener('focusout', function(e) {
+      if (e.target.matches('input, textarea, select')) {
+        var v = document.querySelector('meta[name=viewport]');
+        if (v) {
+          v.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+          requestAnimationFrame(function() {
+            v.content = 'width=device-width, initial-scale=1';
+          });
+        }
+      }
+    });
+  </script>
+    <script type="module" crossorigin src="/assets/index-DewTJG-1.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BqBgPS-9.css">
   </head>
   <body>
     <div id="root"></div>
