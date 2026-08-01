@@ -8,7 +8,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Miles Tracker" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
+         values; without it they are 0 and the bottom nav sits under the iOS
+         home indicator in standalone mode. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>miles-tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,16 +31,18 @@
       if (e.target.matches('input, textarea, select')) {
         var v = document.querySelector('meta[name=viewport]');
         if (v) {
-          v.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+          // Must keep viewport-fit=cover on both writes — dropping it here would
+          // silently zero every safe-area inset the moment a field loses focus.
+          v.content = 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover';
           requestAnimationFrame(function() {
-            v.content = 'width=device-width, initial-scale=1';
+            v.content = 'width=device-width, initial-scale=1, viewport-fit=cover';
           });
         }
       }
     });
   </script>
-    <script type="module" crossorigin src="/miles-tracker/assets/index-D6p57q6F.js"></script>
-    <link rel="stylesheet" crossorigin href="/miles-tracker/assets/index-NDtQ0dqL.css">
+    <script type="module" crossorigin src="/miles-tracker/assets/index-PIIGsWeY.js"></script>
+    <link rel="stylesheet" crossorigin href="/miles-tracker/assets/index-BKxzpZ2Q.css">
   </head>
   <body>
     <div id="root"></div>
