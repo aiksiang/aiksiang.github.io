@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — Miles Tracker</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --rule: #e4e4e4; --accent: #1a1a1a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121212; --fg: #ededed; --muted: #a0a0a0; --rule: #2c2c2c; --accent: #ededed; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.02em; }
+  h2 { font-size: 1.15rem; margin: 2.5rem 0 .75rem; letter-spacing: -.01em; }
+  h3 { font-size: 1rem; margin: 1.5rem 0 .5rem; }
+  p, li { color: var(--fg); }
+  .meta { color: var(--muted); font-size: .875rem; margin: 0 0 2rem; }
+  ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875em;
+         background: var(--rule); padding: .1em .35em; border-radius: 3px; }
+  pre { background: var(--rule); border-radius: 5px; padding: .9rem 1rem;
+        overflow-x: auto; font-size: .8125rem; line-height: 1.5; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .9rem; display: block; overflow-x: auto; }
+  th, td { text-align: left; padding: .55rem .75rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; white-space: nowrap; }
+  .callout { border-left: 3px solid var(--rule); padding: .25rem 0 .25rem 1rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Miles Tracker — Privacy Policy</h1>
+<p class="meta">Last updated: 27 August 2026</p>
+
+<p>Miles Tracker is a personal credit-card spending, expense and portfolio tracker. It runs
+entirely in your web browser. There is no application server operated by us: the app talks
+only to Google's own services, using your own Google account, and nobody else — including
+the developer — can read your data.</p>
+
+<p>This policy explains exactly what Google data the app accesses, why, where it goes, and
+how to remove it.</p>
+
+<h2>Who operates this app</h2>
+<p>Miles Tracker is an independent, non-commercial project by an individual developer. It is
+not affiliated with Google, nor with any bank or card issuer whose emails it reads. Contact:
+<a href="mailto:aiksiang.ang@gmail.com">aiksiang.ang@gmail.com</a>.</p>
+
+<h2>Google account data the app accesses</h2>
+
+<table>
+<thead><tr><th>Scope requested</th><th>What it is used for</th></tr></thead>
+<tbody>
+<tr>
+  <td><code>gmail.readonly</code></td>
+  <td>Read-only search of your mailbox for credit-card and bank <em>transaction alert</em>
+      emails, so spending can be listed without manual entry.</td>
+</tr>
+<tr>
+  <td><code>drive.file</code></td>
+  <td>Read and write access to the <strong>single Google Sheet you create or select</strong>
+      inside the app, used as your bank-statement and investment ledger. This scope gives no
+      access to any other file in your Drive.</td>
+</tr>
+<tr>
+  <td><code>email</code>, <code>profile</code></td>
+  <td>Sign-in: identifying your account so your own settings are loaded and kept separate
+      from anyone else's.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>How Gmail access is used, specifically</h3>
+<p>The app does not read your mailbox generally. It issues a narrow Gmail search restricted to
+messages that are <em>both</em>:</p>
+<ul>
+  <li>from a fixed list of bank and payment sender domains (DBS, POSB, UOB, OCBC, HSBC,
+      Citibank, Maybank, Standard Chartered, American Express, Instarem, Trust Bank, GXS,
+      MariBank and Grab), <strong>and</strong></li>
+  <li>carrying one of eight transaction-alert subject terms — "transaction", "spent", "alert",
+      "charged", "debited", "ibanking", "internet banking", or "Your GrabPay Wallet Statement"
+      — <strong>and</strong></li>
+  <li>dated within the month you are currently viewing.</li>
+</ul>
+
+<p>All three conditions must hold. In full, the search the app sends to Gmail is:</p>
+
+<pre><code>from:("dbs.com" OR "posb.com" OR "uob.com" OR "uobgroup.com" OR "ocbc.com"
+      OR "hsbc.com" OR "citi.com" OR "citibank.com" OR "maybank.com" OR "sc.com"
+      OR "aexp.com" OR "instarem.com" OR "trustbank.sg" OR "gxs.com"
+      OR "maribank.sg" OR "no-reply@grab.com")
+subject:("transaction" OR "spent" OR "alert" OR "charged" OR "debited"
+      OR "ibanking" OR "internet banking" OR "Your GrabPay Wallet Statement")
+after:YYYY/MM/DD before:YYYY/MM/DD</code></pre>
+
+<p>Mail that does not match every part of this is never requested and therefore never reaches
+the app at all. The date bounds are the month you are viewing, widened by one day at the start
+to account for the time-zone difference between Gmail's filters and Singapore time.</p>
+<p>Matching messages are fetched into your browser's memory and parsed there to extract four
+things: the amount, the merchant name, the last four digits of the card, and the date. The
+message body is then discarded. <strong>Email content is never transmitted to any server, never
+stored, and never seen by the developer or any third party.</strong> The app never sends,
+modifies, deletes or labels mail; the scope is read-only and cannot do so.</p>
+
+<h3>How Sheets/Drive access is used, specifically</h3>
+<p>The app reads the statement, investment-history, investment-value, price and class tabs of
+the one spreadsheet you link, and writes back: reconciliation match results, an
+<code>Expenses YYYY-MM</code> export tab, and the investment class labels you choose. The
+spreadsheet stays yours and remains fully editable by you at any time.</p>
+
+<p>The per-file nature of this scope is enforced by Google, not merely a restraint the app
+observes. Access is recorded against specific file identifiers, so a request for any other file
+is refused by Google's servers regardless of what the app asks for. The broad
+"see and manage all your Drive files" scope is a different permission, and this app does not
+request it.</p>
+
+<h2>Every connection the app makes</h2>
+
+<p>Because the app has no server of its own, the complete set of network destinations it
+contacts is short enough to list. These are the only Google endpoints it calls:</p>
+
+<table>
+<thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>sheets.googleapis.com/v4/spreadsheets</code></td>
+    <td>Create, read and write the one spreadsheet you linked</td></tr>
+<tr><td><code>www.googleapis.com/gmail/v1/users/me/messages</code></td>
+    <td>The filtered transaction-alert search described above, and reading the messages it returns</td></tr>
+<tr><td><code>identitytoolkit.googleapis.com</code></td>
+    <td>Firebase sign-in with your Google account</td></tr>
+<tr><td><code>securetoken.googleapis.com</code></td>
+    <td>Refreshing the sign-in token so you are not signed out constantly</td></tr>
+<tr><td><code>firestore.googleapis.com</code></td>
+    <td>Saving and loading your own settings and decisions, as described below</td></tr>
+</tbody>
+</table>
+
+<p>Notably absent is the Google Drive API. The app calls it nowhere — it never lists, searches,
+browses or enumerates files, and contains no code capable of doing so. It addresses your
+spreadsheet directly by its identifier through the Sheets API.</p>
+
+<p>The only request outside that list is to <code>fonts.googleapis.com</code> and
+<code>fonts.gstatic.com</code> for the page's typography, which carries none of your data. There
+are no other outbound connections of any kind.</p>
+
+<h2>Where your data is stored</h2>
+
+<h3>In your browser</h3>
+<p>Transactions parsed from email, loaded statement rows, the investment ledger and price
+quotes are cached in your browser's <code>localStorage</code> so the app does not re-fetch on
+every visit. Access tokens are held in <code>sessionStorage</code> and expire when the browser
+tab closes. All of this is on your own device. Signing in with a different Google account on
+the same device automatically discards the previous account's cached data.</p>
+
+<h3>In Google Cloud Firestore</h3>
+<p>Your <em>decisions and settings</em> — not your email — are saved to a Google Cloud Firestore
+database so they follow you between devices. This is limited to:</p>
+<ul>
+  <li>Card settings and expense categories you define</li>
+  <li>Merchant-to-category mappings and per-transaction overrides you make</li>
+  <li>Transactions you hide, and transactions you enter manually or as recurring</li>
+  <li>The ID of the spreadsheet you linked, its card-label mapping, and your reconciliation decisions</li>
+  <li>Your Google account identifier and email address, from sign-in</li>
+</ul>
+<p>Each record is stored under your own account identifier, and the database's security rules
+permit read and write access only to the signed-in owner of that record. The database is hosted
+by Google Cloud on Google's infrastructure.</p>
+
+<p>To be straightforward about one thing: as the owner of the underlying Google Cloud project,
+the developer holds administrative access to that database and could in principle view the
+settings records listed above. That access exists to operate the service, not to inspect anyone's
+data. It does not extend to your email — which is never stored
+there — nor to your spreadsheet, which lives in your own Drive under your own account.</p>
+
+<h2>What the app does not do</h2>
+<ul>
+  <li>It does <strong>not</strong> sell, rent, trade or share your data with anyone.</li>
+  <li>It does <strong>not</strong> use your data for advertising, profiling or credit assessment.</li>
+  <li>It does <strong>not</strong> use your data to train, fine-tune or evaluate any artificial
+      intelligence or machine-learning model.</li>
+  <li>It contains <strong>no</strong> analytics, tracking pixels, advertising SDKs or third-party
+      trackers of any kind. The only outbound requests are to Google's APIs and to Google Fonts
+      for typography.</li>
+  <li>Nobody reads your email. Message content never leaves your browser, so it is
+      technically unreachable by the developer or anyone else.</li>
+</ul>
+
+<h2>Limited Use disclosure</h2>
+<p class="callout">Miles Tracker's use and transfer of information received from Google APIs to
+any other app will adhere to the
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services
+User Data Policy</a>, including the Limited Use requirements.</p>
+<p>In particular, Google user data is used only to provide and improve the user-facing features
+described above; it is not transferred to others except as necessary to provide those features,
+to comply with applicable law, or as part of a merger or acquisition; and it is not used for
+serving advertisements or for developing or improving generalised AI or ML models.</p>
+
+<h2>Data retention and deletion</h2>
+<p>You can remove your data at any time, and you do not need to ask us to do it:</p>
+<ul>
+  <li><strong>Revoke access.</strong> Visit
+      <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>,
+      select Miles Tracker, and choose Remove Access. The app immediately loses all ability to
+      read your mail or your spreadsheet.</li>
+  <li><strong>Clear the local cache.</strong> Clear site data for the app in your browser, or use
+      the reset controls in the app's Settings. This removes every parsed transaction and cached
+      figure from your device.</li>
+  <li><strong>Delete stored settings, from inside the app.</strong> Open
+      <em>Settings → Data</em> and choose <em>Delete all my data</em>. This permanently erases
+      every settings and transaction record held for your account on the server, along with the
+      local caches on your device. It takes effect immediately, needs no request to anyone, and
+      cannot be undone.</li>
+  <li><strong>Your spreadsheet</strong> belongs to you and is unaffected by any of the above; delete
+      it from Google Drive if you no longer want it.</li>
+</ul>
+<p>Cached email-derived data is transient by design: it is recomputed from Gmail on demand and
+can be discarded at any point with no loss of your settings.</p>
+
+<h2>Security</h2>
+<p>All communication with Google APIs uses HTTPS. Authorisation uses Google OAuth 2.0; the app
+never sees or stores your Google password. Access tokens are short-lived and held only for the
+duration of a browser session. Stored settings are protected by per-user Firestore security
+rules that deny access to everyone except the record's owner.</p>
+
+<h2>Changes to this policy</h2>
+<p>If this policy changes materially, the revised version will be published at this address with
+an updated date above. Continued use of the app after a change constitutes acceptance of it.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy, or anything else about Miles Tracker:</p>
+<p><strong>Aik Siang Ang</strong><br />
+<a href="mailto:aiksiang.ang@gmail.com">aiksiang.ang@gmail.com</a></p>
+<p>Miles Tracker is an independent personal project, operated by an individual rather than a
+company. Requests are normally answered within a few days. You do not need to write in to delete
+your data — the app deletes it for you, immediately, as described above.</p>
+
+<hr />
+<p class="meta">Miles Tracker · Privacy Policy · Last updated 27 August 2026</p>
+
+</main>
+</body>
+</html>
