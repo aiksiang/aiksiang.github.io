@@ -44,7 +44,7 @@
 <h1>Miles Tracker — Privacy Policy</h1>
 <p class="meta">Last updated: 27 August 2026</p>
 
-<p>Miles Tracker is a personal credit-card spending, expense and portfolio tracker. It runs
+<p>Miles Tracker is a personal credit-card spending and expense tracker. It runs
 entirely in your web browser. There is no application server operated by us: the app talks
 only to Google's own services, using your own Google account, and nobody else — including
 the developer — can read your data.</p>
@@ -70,7 +70,7 @@ not affiliated with Google, nor with any bank or card issuer whose emails it rea
 <tr>
   <td><code>drive.file</code></td>
   <td>Read and write access to the <strong>single Google Sheet you create or select</strong>
-      inside the app, used as your bank-statement and investment ledger. This scope gives no
+      inside the app, used as your bank-statement ledger. This scope gives no
       access to any other file in your Drive.</td>
 </tr>
 <tr>
@@ -114,9 +114,8 @@ stored, and never seen by the developer or any third party.</strong> The app nev
 modifies, deletes or labels mail; the scope is read-only and cannot do so.</p>
 
 <h3>How Sheets/Drive access is used, specifically</h3>
-<p>The app reads the statement, investment-history, investment-value, price and class tabs of
-the one spreadsheet you link, and writes back: reconciliation match results, an
-<code>Expenses YYYY-MM</code> export tab, and the investment class labels you choose. The
+<p>The app reads the bank-statement tab of the one spreadsheet you link, and writes back
+reconciliation match results and an <code>Expenses YYYY-MM</code> export tab. The
 spreadsheet stays yours and remains fully editable by you at any time.</p>
 
 <p>The per-file nature of this scope is enforced by Google, not merely a restraint the app
@@ -157,9 +156,8 @@ are no other outbound connections of any kind.</p>
 <h2>Where your data is stored</h2>
 
 <h3>In your browser</h3>
-<p>Transactions parsed from email, loaded statement rows, the investment ledger and price
-quotes are cached in your browser's <code>localStorage</code> so the app does not re-fetch on
-every visit. Access tokens are held in <code>sessionStorage</code> and expire when the browser
+<p>Transactions parsed from email and loaded statement rows are cached in your browser's
+<code>localStorage</code> so the app does not re-fetch on every visit. Access tokens are held in <code>sessionStorage</code> and expire when the browser
 tab closes. All of this is on your own device. Signing in with a different Google account on
 the same device automatically discards the previous account's cached data.</p>
 
