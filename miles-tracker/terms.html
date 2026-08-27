@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terms of Service — Miles Tracker</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5c5c5c; --rule: #e4e4e4; --accent: #1a1a1a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121212; --fg: #ededed; --muted: #a0a0a0; --rule: #2c2c2c; --accent: #ededed; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px; line-height: 1.65; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.02em; }
+  h2 { font-size: 1.15rem; margin: 2.5rem 0 .75rem; letter-spacing: -.01em; }
+  h3 { font-size: 1rem; margin: 1.5rem 0 .5rem; }
+  p, li { color: var(--fg); }
+  .meta { color: var(--muted); font-size: .875rem; margin: 0 0 2rem; }
+  ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875em;
+         background: var(--rule); padding: .1em .35em; border-radius: 3px; }
+  pre { background: var(--rule); border-radius: 5px; padding: .9rem 1rem;
+        overflow-x: auto; font-size: .8125rem; line-height: 1.5; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .9rem; display: block; overflow-x: auto; }
+  th, td { text-align: left; padding: .55rem .75rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; white-space: nowrap; }
+  .callout { border-left: 3px solid var(--rule); padding: .25rem 0 .25rem 1rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Miles Tracker — Terms of Service</h1>
+<p class="meta">Last updated: 27 August 2026</p>
+
+<p>These terms govern your use of Miles Tracker (the "app"), a personal credit-card spending,
+expense and portfolio tracker provided free of charge by an individual developer. By signing in
+and using the app, you agree to them. If you do not agree, please do not use the app.</p>
+
+<h2>What Miles Tracker is</h2>
+<p>Miles Tracker is a personal-finance <em>tracking</em> tool. It reads transaction-alert emails
+from your Gmail account and a Google Sheet you provide, and presents the results as spending
+summaries, bonus-cap progress, and portfolio figures. It runs entirely in your browser.</p>
+<p>It is an independent hobby project. It is not a bank, a broker, a payment service or a
+licensed financial institution, and it is not affiliated with Google or with any bank, card
+issuer or fund whose data it displays.</p>
+
+<h2>The figures are estimates — always check them against your own statements</h2>
+
+<p class="callout">Miles Tracker's numbers are derived automatically and may be incomplete or
+wrong. Your bank, card issuer and broker are the authoritative record. Never rely on this app
+alone for a financial decision.</p>
+
+<p>Specifically, and by design:</p>
+<ul>
+  <li><strong>Email parsing is best-effort.</strong> Amounts, merchants, card numbers and dates
+      are extracted from alert emails by pattern-matching. A change to a bank's email format, an
+      alert that was never sent, or an unusual message can cause a transaction to be missed,
+      duplicated or misread.</li>
+  <li><strong>Bonus-cap progress is an approximation.</strong> Card categories, caps and
+      qualifying-spend rules are configured by hand and may not reflect your issuer's current
+      terms. Whether a transaction earns bonus miles is decided by your issuer, not by this app.</li>
+  <li><strong>Foreign-currency figures may differ from what is charged.</strong> Alerts often
+      carry estimated conversions; the final amount is set by your card network on settlement.</li>
+  <li><strong>Reconciliation is automated matching and can be wrong.</strong> It may pair,
+      correct, add or hide transactions incorrectly. You are asked to review its proposals for
+      that reason.</li>
+  <li><strong>Investment figures depend entirely on what you type into your sheet.</strong>
+      Valuations, returns, MWRR and TWR are computed from your own entries and from prices in
+      your sheet, which may be stale or wrong. They are not audited, not a statement of account,
+      and not a performance record you should rely on.</li>
+</ul>
+
+<h2>Not financial advice</h2>
+<p>Nothing in the app is financial, investment, tax or legal advice, and nothing in it is a
+recommendation to buy, sell or hold anything, or to use any particular card or product. The app
+presents your own data back to you. Decisions you take on the basis of it are yours alone, and
+you should seek advice from a qualified professional where appropriate.</p>
+
+<h2>Your responsibilities</h2>
+<ul>
+  <li>Keep your Google account secure. Anyone with access to it has access to the app's view of
+      your data.</li>
+  <li>Maintain your own records. The app is a convenience layer over data that lives elsewhere,
+      and is not a system of record.</li>
+  <li>Use it only with accounts and data that are yours, and only in ways permitted by
+      Google's terms for the Gmail, Sheets and Drive services it relies on.</li>
+  <li>Do not attempt to use the app to access anyone else's information.</li>
+</ul>
+
+<h2>Availability and changes</h2>
+<p>The app is provided as-is, when it happens to be available. There is no service-level
+commitment, no support obligation, and no guarantee of uptime, of continued availability, or of
+data preservation. Features may change or be removed, and the app may be discontinued entirely,
+at any time and without notice. Because it depends on Google's APIs and on your bank's email
+formats, either of which can change without warning, parts of it may stop working at any time.</p>
+
+<h2>Your data</h2>
+<p>How the app handles your information is set out in the
+<a href="privacy.html">Privacy Policy</a>, which forms part of these terms. In short: email
+content never leaves your browser, only your own settings and decisions are stored, and you can
+delete everything from within the app at any time.</p>
+
+<h2>No warranty</h2>
+<p>The app is provided "as is" and "as available", without warranty of any kind, express or
+implied, including any implied warranty of merchantability, fitness for a particular purpose,
+accuracy, or non-infringement. No warranty is given that the app will be error-free, that its
+figures will be correct or complete, or that defects will be corrected.</p>
+
+<h2>Limitation of liability</h2>
+<p>To the fullest extent permitted by law, the developer is not liable for any loss or damage
+arising out of your use of, or inability to use, the app — including financial loss, missed
+rewards or bonus caps, decisions taken on inaccurate figures, loss of data, or any indirect or
+consequential loss. The app is supplied free of charge, and you use it at your own risk.</p>
+<p>Nothing in these terms excludes or limits liability that cannot lawfully be excluded or
+limited.</p>
+
+<h2>Ending your use</h2>
+<p>You may stop using the app at any time. To remove your access and your data, revoke the app
+at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> and
+use <em>Settings → Data → Delete all my data</em> in the app. Your Google Sheet stays in your own
+Drive and is unaffected.</p>
+
+<h2>Governing law</h2>
+<p>These terms are governed by the laws of Singapore, and the courts of Singapore have
+non-exclusive jurisdiction over any dispute arising from them.</p>
+
+<h2>Changes to these terms</h2>
+<p>If these terms change materially, the revised version will be published at this address with
+an updated date above. Continued use of the app after a change constitutes acceptance of it.</p>
+
+<h2>Contact</h2>
+<p>Questions about these terms, or anything else about Miles Tracker:</p>
+<p><strong>Aik Siang Ang</strong><br />
+<a href="mailto:aiksiang.ang@gmail.com">aiksiang.ang@gmail.com</a></p>
+
+<hr />
+<p class="meta">Miles Tracker · Terms of Service · Last updated 27 August 2026</p>
+
+</main>
+</body>
+</html>
