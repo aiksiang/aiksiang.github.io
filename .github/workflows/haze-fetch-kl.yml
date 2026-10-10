@@ -1,0 +1,54 @@
+name: Haze - fetch KL air quality
+
+# Feeds aiksiang.github.io/haze. Malaysia's DOE feed blocks browser requests
+# from other origins (CORS), so this job fetches it server-side and commits
+# haze/data/latest.json + haze/data/history.json. Singapore's feed is read
+# directly by the browser. Source: github.com/aiksiang/haze (private).
+
+on:
+  schedule:
+    # DOE publishes hourly at an undocumented minute; checking twice an hour
+    # halves the lag. A commit only happens when a new reading appears.
+    - cron: '15,45 * * * *'
+  workflow_dispatch:
+  # Also run when the fetcher itself changes. The job's own data commits use
+  # GITHUB_TOKEN, which never re-triggers workflows.
+  push:
+    branches: [master]
+    paths:
+      - .github/haze/fetch-kl.mjs
+      - .github/workflows/haze-fetch-kl.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: haze-fetch-kl
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HAZE_DATA_DIR: haze/data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch DOE stations
+        run: node .github/haze/fetch-kl.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add haze/data/latest.json haze/data/history.json
+          # latest.json always carries a new fetchedAt; only commit when a reading changed.
+          if git diff --cached --quiet -- haze/data/history.json; then
+            echo "No new readings."
+            exit 0
+          fi
+          git commit -m "Haze: update KL air quality data"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push

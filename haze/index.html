@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haze · SG & KL</title>
+<meta name="description" content="Live air quality for Singapore and Kuala Lumpur, from NEA and DOE Malaysia.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121314" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23c9a227'/%3E%3Cpath d='M6 13h20M4 18h24M7 23h18' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3efe6;
+  --card: #fbf9f4;
+  --ink: #16171a;
+  --ink-2: #45474d;
+  --ink-3: #6b6d73;
+  --rule: #d9d3c5;
+  --rule-soft: #e7e2d6;
+  --accent: #8a5a00;
+  --warn-bg: #fff1cc;
+  --warn-ink: #5c3d00;
+  --err-bg: #fbe3df;
+  --err-ink: #7a1d10;
+  --chart-line: #16171a;
+  --chart-wash: rgba(22, 23, 26, .12);
+  --zone-alpha: .16;
+  --chip-alpha: .22;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 8px 24px -12px rgba(40,30,10,.18);
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121314;
+    --card: #1b1c1e;
+    --ink: #f1eee7;
+    --ink-2: #c4c1ba;
+    --ink-3: #9a978f;
+    --rule: #34353a;
+    --rule-soft: #26272b;
+    --accent: #e5b84a;
+    --warn-bg: #3a2c08;
+    --warn-ink: #ffe3a1;
+    --err-bg: #3b1712;
+    --err-ink: #ffc2b6;
+    --chart-line: #f1eee7;
+    --chart-wash: rgba(241, 238, 231, .14);
+    --zone-alpha: .2;
+    --chip-alpha: .3;
+    --shadow: 0 1px 0 rgba(255,255,255,.03), 0 10px 28px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121314;
+  --card: #1b1c1e;
+  --ink: #f1eee7;
+  --ink-2: #c4c1ba;
+  --ink-3: #9a978f;
+  --rule: #34353a;
+  --rule-soft: #26272b;
+  --accent: #e5b84a;
+  --warn-bg: #3a2c08;
+  --warn-ink: #ffe3a1;
+  --err-bg: #3b1712;
+  --err-ink: #ffc2b6;
+  --chart-line: #f1eee7;
+  --chart-wash: rgba(241, 238, 231, .14);
+  --zone-alpha: .2;
+  --chip-alpha: .3;
+  --shadow: 0 1px 0 rgba(255,255,255,.03), 0 10px 28px -14px rgba(0,0,0,.7);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--sans);
+  font-feature-settings: "kern";
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 28px; } }
+.mono { font-family: var(--mono); font-size: .8125rem; letter-spacing: -.01em; }
+.muted { color: var(--ink-3); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- masthead ---------- */
+.masthead { border-bottom: 1px solid var(--rule); }
+.masthead .wrap { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; padding-top: 22px; padding-bottom: 16px; }
+.brand { display: flex; align-items: baseline; gap: 14px; }
+.brand h1 { margin: 0; font: 600 2.4rem/1 var(--serif); letter-spacing: -.02em; }
+.brand p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+.controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.controls .mono { color: var(--ink-3); }
+.btn {
+  border: 1px solid var(--rule); background: var(--card); border-radius: 999px;
+  padding: 6px 14px; font-size: .875rem; cursor: pointer; min-height: 36px;
+}
+.btn:hover { border-color: var(--ink-3); }
+.btn[aria-busy="true"] { opacity: .6; cursor: progress; }
+
+/* ---------- city cards ---------- */
+.cities { display: grid; gap: 20px; margin: 22px 0 8px; }
+@media (min-width: 960px) { .cities { grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; } }
+.city {
+  --band: #999;
+  position: relative; background: var(--card); border: 1px solid var(--rule);
+  border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; min-width: 0;
+}
+.city::before { /* the haze: a wash of the current band colour across the top */
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 260px; pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--band) 30%, transparent), transparent);
+  opacity: .9;
+}
+.city > * { position: relative; }
+.city-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 8px 12px; padding: 20px 20px 0; }
+@media (min-width: 720px) { .city-head { padding: 24px 28px 0; } }
+.city-head h2 { margin: 0; font: 600 2rem/1.05 var(--serif); letter-spacing: -.015em; }
+.city-head .agency { margin: 4px 0 0; color: var(--ink-2); font-size: .875rem; }
+.fresh { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); white-space: nowrap; }
+.fresh::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2f8f4e; }
+.fresh.stale { background: var(--warn-bg); color: var(--warn-ink); border-color: transparent; }
+.fresh.stale::before { background: #c98a00; }
+.fresh.dead { background: var(--err-bg); color: var(--err-ink); border-color: transparent; }
+.fresh.dead::before { background: #c0392b; }
+.city-body { padding: 8px 20px 22px; }
+@media (min-width: 720px) { .city-body { padding: 8px 28px 26px; } }
+.when { margin: 6px 0 0; color: var(--ink-2); font-size: .875rem; }
+
+.notice { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; font-size: .9rem; }
+.notice.err { background: var(--err-bg); color: var(--err-ink); }
+.notice.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.notice strong { font-weight: 600; }
+
+.heroes { display: grid; gap: 14px 22px; margin-top: 18px; grid-template-columns: 1fr; }
+@media (min-width: 520px) { .heroes.two { grid-template-columns: 1fr 1fr; } }
+.hero { min-width: 0; }
+.hero .label { font-size: .875rem; color: var(--ink-2); font-weight: 500; }
+.hero .figure { display: flex; align-items: baseline; gap: 8px; margin: 2px 0 6px; }
+.hero .num { font: 400 clamp(4rem, 13vw, 6.2rem)/.92 var(--serif); letter-spacing: -.035em; font-variation-settings: "opsz" 144; }
+.hero.secondary .num { font-size: clamp(3rem, 9vw, 4.2rem); }
+.hero .unit { color: var(--ink-2); font-size: .95rem; }
+.hero .scope { margin: 6px 0 0; font-size: .8125rem; color: var(--ink-3); }
+.chip {
+  --c: #999;
+  display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c) calc(var(--chip-alpha) * 100%), transparent);
+  font-weight: 600; font-size: .9rem; white-space: nowrap;
+}
+.chip i { width: 18px; height: 18px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.25); flex: none; }
+.chip small { font-weight: 500; color: var(--ink-2); font-size: .8rem; }
+.chip.sm { font-size: .8125rem; padding: 2px 10px 2px 3px; gap: 6px; }
+.chip.sm i { width: 12px; height: 12px; }
+
+.advice { margin-top: 20px; border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+.advice h3, .panel h3 { margin: 0 0 8px; font: 600 .78rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.advice ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.advice li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 10px; font-size: .9375rem; }
+.advice li b { font-weight: 500; color: var(--ink-2); font-size: .875rem; padding-top: 1px; }
+@media (max-width: 420px) { .advice li { grid-template-columns: 1fr; gap: 0; } }
+.advice .src { margin: 10px 0 0; font-size: .8125rem; color: var(--ink-3); }
+.adv-group + .adv-group { margin-top: 14px; }
+.adv-title { margin: 0 0 8px; font-weight: 600; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.adv-title .muted { font-weight: 400; font-size: .8125rem; }
+
+.panel { margin-top: 22px; border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.panel-head h3 { margin: 0; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 2px; background: var(--paper); }
+.seg button { border: 0; background: transparent; padding: 5px 12px; border-radius: 999px; font-size: .8125rem; cursor: pointer; min-height: 32px; color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* ranked list */
+.rank { list-style: none; margin: 0; padding: 0; }
+.rank li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+.rank li:last-child { border-bottom: 0; }
+.rank .nm { font-weight: 500; min-width: 0; }
+.rank .nm small { display: block; font-weight: 400; color: var(--ink-3); font-size: .8125rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank .vals { display: flex; gap: 14px; align-items: baseline; justify-content: end; flex-wrap: wrap; text-align: right; }
+.rank .v { font-variant-numeric: tabular-nums; font-size: 1.125rem; font-weight: 600; }
+.rank .v small { font-size: .75rem; font-weight: 400; color: var(--ink-3); margin-left: 3px; }
+.rank .bar { grid-column: 1 / -1; height: 6px; border-radius: 3px; background: var(--rule-soft); overflow: hidden; }
+.rank .bar span { display: block; height: 100%; border-radius: 3px; background: var(--c, #999); }
+
+/* pollutant table */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+.tabs button { border: 1px solid var(--rule); background: transparent; border-radius: 999px; padding: 4px 12px; font-size: .8125rem; cursor: pointer; min-height: 32px; color: var(--ink-2); }
+.tabs button[aria-selected="true"] { border-color: var(--ink); color: var(--ink); background: color-mix(in srgb, var(--ink) 7%, transparent); font-weight: 500; }
+table.poll { width: 100%; border-collapse: collapse; font-size: .9rem; }
+table.poll th, table.poll td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule-soft); vertical-align: middle; }
+table.poll th { font-weight: 500; color: var(--ink-3); font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; }
+table.poll td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.poll th.n { text-align: right; }
+table.poll td .per { display: block; color: var(--ink-3); font-size: .78rem; }
+table.poll .si { display: flex; align-items: center; gap: 8px; justify-content: end; }
+table.poll .si .meter { width: 56px; height: 6px; border-radius: 3px; background: var(--rule-soft); overflow: hidden; flex: none; }
+table.poll .si .meter span { display: block; height: 100%; background: var(--c, #999); }
+table.poll tr.dom td:first-child { font-weight: 600; }
+.foot-note { margin: 8px 0 0; font-size: .8125rem; color: var(--ink-3); }
+
+/* chart */
+.chart { position: relative; touch-action: pan-y; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart svg:focus { outline: none; }
+.chart svg:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.chart .axis text { fill: var(--ink-3); font: 400 11px var(--mono); }
+.chart .grid line { stroke: var(--rule-soft); stroke-width: 1; }
+.chart .zone-label { fill: var(--ink-2); font: 500 10.5px var(--sans); }
+.chart .line { fill: none; stroke: var(--chart-line); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .wash { fill: var(--chart-wash); }
+.chart .end { fill: var(--chart-line); stroke: var(--card); stroke-width: 2; }
+.chart .end-label { fill: var(--ink); font: 600 12px var(--sans); }
+.chart .xhair { stroke: var(--ink-3); stroke-width: 1; }
+.chart .xdot { fill: var(--chart-line); stroke: var(--card); stroke-width: 2; }
+.tip {
+  position: absolute; top: 0; pointer-events: none; background: var(--ink); color: var(--paper);
+  border-radius: 8px; padding: 6px 10px; font-size: .8125rem; line-height: 1.35; white-space: nowrap;
+  transform: translate(-50%, -100%); opacity: 0; transition: opacity .1s;
+}
+.tip b { font-size: 1rem; font-weight: 600; }
+.tip .dim { opacity: .75; }
+.chart-empty { padding: 28px 12px; text-align: center; color: var(--ink-3); font-size: .9rem; border: 1px dashed var(--rule); border-radius: 10px; }
+details.table-view { margin-top: 8px; font-size: .875rem; }
+details.table-view summary { cursor: pointer; color: var(--ink-3); }
+details.table-view .scroll { max-height: 240px; overflow: auto; margin-top: 6px; }
+details.table-view table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+details.table-view td, details.table-view th { padding: 3px 8px; border-bottom: 1px solid var(--rule-soft); text-align: right; }
+details.table-view td:first-child, details.table-view th:first-child { text-align: left; }
+
+/* loading: hold layout, dim */
+.city[aria-busy="true"] .city-body { opacity: .55; transition: opacity .2s; }
+.skeleton { color: var(--ink-3); padding: 30px 0; }
+
+/* ---------- comparison ---------- */
+section.block { margin: 34px 0 0; }
+section.block > h2 { font: 600 1.5rem/1.15 var(--serif); margin: 0 0 4px; letter-spacing: -.01em; }
+section.block > .lede { margin: 0 0 16px; color: var(--ink-2); max-width: 62ch; }
+.compare { background: var(--card); border: 1px solid var(--rule); border-radius: 18px; padding: 20px; box-shadow: var(--shadow); }
+@media (min-width: 720px) { .compare { padding: 24px 28px; } }
+.cmp-grid { display: grid; gap: 18px; }
+@media (min-width: 720px) { .cmp-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+.cmp h3 { margin: 0 0 10px; font: 600 .78rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.cmp-row { display: grid; grid-template-columns: 7.5rem 1fr 4.5rem; gap: 10px; align-items: center; margin: 8px 0; }
+.cmp-row .who { font-weight: 500; font-size: .9375rem; }
+.cmp-row .who small { display: block; color: var(--ink-3); font-weight: 400; font-size: .75rem; }
+.cmp-row .track { position: relative; height: 22px; border-radius: 6px; background: var(--rule-soft); }
+.cmp-row .track span { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; background: var(--chart-line); }
+.cmp-row .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 1.125rem; }
+.cmp-row .val small { display: block; font-weight: 400; font-size: .7rem; color: var(--ink-3); }
+.cmp-axis { display: grid; grid-template-columns: 7.5rem 1fr 4.5rem; gap: 10px; }
+.cmp-axis div { display: flex; justify-content: space-between; color: var(--ink-3); font: 400 11px var(--mono); }
+
+.callout { margin-top: 18px; padding: 14px 16px; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 0 10px 10px 0; font-size: .9375rem; color: var(--ink-2); }
+.callout b { color: var(--ink); }
+
+/* ---------- scales ---------- */
+.scales { display: grid; gap: 18px; }
+@media (min-width: 900px) { .scales { grid-template-columns: repeat(3, 1fr); } }
+.scale { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 16px 18px; }
+.scale h3 { margin: 0; font: 600 1.05rem/1.25 var(--serif); }
+.scale .who { margin: 2px 0 10px; color: var(--ink-3); font-size: .8125rem; }
+.scale ol { list-style: none; margin: 0; padding: 0; }
+.scale li { display: grid; grid-template-columns: 22px 5.2rem 1fr; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--rule-soft); font-size: .9rem; }
+.scale li i { width: 22px; height: 22px; border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.scale li .rng { font-variant-numeric: tabular-nums; color: var(--ink-2); font-family: var(--mono); font-size: .8rem; }
+.scale .note { margin: 10px 0 0; font-size: .8125rem; color: var(--ink-3); }
+
+footer { margin: 40px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: .875rem; }
+footer p { margin: 0 0 8px; max-width: 80ch; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (forced-colors: active) { .chip i, .scale li i, .rank .bar span { forced-color-adjust: none; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Haze</h1>
+      <p>Air quality now — Singapore &amp; Kuala Lumpur</p>
+    </div>
+    <div class="controls">
+      <span class="mono" id="nextRefresh" aria-live="off"></span>
+      <button class="btn" id="refreshBtn" type="button">Refresh</button>
+      <button class="btn" id="themeBtn" type="button" aria-label="Colour theme">Theme: auto</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cities" aria-label="Current air quality by city">
+    <article class="city" id="sg" aria-busy="true" aria-labelledby="sg-title">
+      <div class="city-head">
+        <div>
+          <h2 id="sg-title">Singapore</h2>
+          <p class="agency">National Environment Agency (NEA)</p>
+        </div>
+        <span class="fresh mono" data-role="fresh">loading…</span>
+      </div>
+      <div class="city-body" data-role="body"><p class="skeleton">Loading Singapore readings…</p></div>
+    </article>
+
+    <article class="city" id="kl" aria-busy="true" aria-labelledby="kl-title">
+      <div class="city-head">
+        <div>
+          <h2 id="kl-title">Kuala Lumpur</h2>
+          <p class="agency">Department of Environment Malaysia (DOE · APIMS)</p>
+        </div>
+        <span class="fresh mono" data-role="fresh">loading…</span>
+      </div>
+      <div class="city-body" data-role="body"><p class="skeleton">Loading Kuala Lumpur readings…</p></div>
+    </article>
+  </section>
+
+  <section class="block" aria-labelledby="cmp-title">
+    <h2 id="cmp-title">Like for like: PM2.5</h2>
+    <p class="lede">Fine particles (PM2.5) are what haze is mostly made of, and both agencies publish the raw concentration in the same unit. This is the one figure you can compare directly.</p>
+    <div class="compare">
+      <div class="cmp-grid" id="compare"></div>
+      <div class="callout">
+        <b>PSI and API are not the same scale.</b> Singapore's Pollutant Standards Index and Malaysia's Air Pollutant Index both run 0–500 with similar band names, but they are computed differently (different averaging rules and breakpoints), so a PSI of 150 and an API of 150 don't describe the same air. Compare the µg/m³ figures above instead.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="scales-title">
+    <h2 id="scales-title">The scales</h2>
+    <p class="lede">Bands and colours as published by each agency. Every colour on this page is paired with its band name.</p>
+    <div class="scales" id="scales"></div>
+  </section>
+
+  <footer>
+    <p><b>Data.</b> Singapore: National Environment Agency via <a href="https://data.gov.sg">data.gov.sg</a> (real-time PSI and PM2.5 APIs), used under the <a href="https://data.gov.sg/open-data-licence">Singapore Open Data Licence</a>. Kuala Lumpur: Department of Environment Malaysia, Air Pollutant Index Management System (<a href="https://eqms.doe.gov.my">eqms.doe.gov.my</a>), collected hourly by a GitHub Actions job because the DOE feed can't be read from other websites.</p>
+    <p>Health guidance is summarised from NEA's and DOE's published advisories; follow official advice and your doctor's over this page. Not an official source.</p>
+    <p class="mono" id="buildInfo"></p>
+  </footer>
+</main>
+
+<script>
+'use strict';
+
+/* =====================================================================
+   Configuration: bands, colours, advice. Sourced from NEA (haze.gov.sg)
+   and DOE Malaysia (eqms.doe.gov.my) — see README for references.
+   ===================================================================== */
+
+const BANDS = {
+  // NEA 24-hr PSI descriptors and colours (haze.gov.sg readings table and stylesheet).
+  psi: {
+    name: '24-hr PSI', agency: 'NEA Singapore', unit: '',
+    bands: [
+      { lo: 0,   hi: 50,  label: 'Good',           color: '#479b02' },
+      { lo: 51,  hi: 100, label: 'Moderate',       color: '#006fa1' },
+      { lo: 101, hi: 200, label: 'Unhealthy',      color: '#ffce03' },
+      { lo: 201, hi: 300, label: 'Very unhealthy', color: '#ffa800' },
+      { lo: 301, hi: Infinity, label: 'Hazardous', color: '#d60000' },
+    ],
+  },
+  // NEA 1-hr PM2.5 bands (haze.gov.sg/resources/1-hr-pm2.5-readings). NEA publishes these
+  // bands without colours; the colours here are this page's, borrowed from NEA's PSI ramp.
+  pm25sg: {
+    name: '1-hr PM2.5', agency: 'NEA Singapore', unit: 'µg/m³', unofficialColours: true,
+    bands: [
+      { lo: 0,   hi: 55,  label: 'Normal',    tag: 'Band I',   color: '#479b02' },
+      { lo: 56,  hi: 150, label: 'Elevated',  tag: 'Band II',  color: '#ffce03' },
+      { lo: 151, hi: 250, label: 'High',      tag: 'Band III', color: '#ffa800' },
+      { lo: 251, hi: Infinity, label: 'Very high', tag: 'Band IV', color: '#d60000' },
+    ],
+  },
+  // DOE Malaysia API status names (CLASS values in the APIMS layer) and colours
+  // (the APIMS public portal's own legend, eqms.doe.gov.my).
+  api: {
+    name: 'API', agency: 'DOE Malaysia', unit: '',
+    bands: [
+      { lo: 0,   hi: 50,  label: 'Good',           color: '#3d8af7' },
+      { lo: 51,  hi: 100, label: 'Moderate',       color: '#7cde6b' },
+      { lo: 101, hi: 200, label: 'Unhealthy',      color: '#ffff00' },
+      { lo: 201, hi: 300, label: 'Very unhealthy', color: '#ffa834' },
+      { lo: 301, hi: Infinity, label: 'Hazardous', color: '#ff3823' },
+    ],
+  },
+};
+
+// NEA "How to plan your outdoor activities during haze" (haze.gov.sg poster, June 2026).
+// 24-hr PSI: for next-day planning.
+const ADVICE_PSI = {
+  'Good':           { healthy: 'Normal activities', vulnerable: 'Normal activities', chronic: 'Normal activities' },
+  'Moderate':       { healthy: 'Normal activities', vulnerable: 'Normal activities', chronic: 'Normal activities' },
+  'Unhealthy':      { healthy: 'Reduce prolonged or strenuous outdoor physical exertion', vulnerable: 'Minimise prolonged or strenuous outdoor physical exertion', chronic: 'Avoid prolonged or strenuous outdoor physical exertion' },
+  'Very unhealthy': { healthy: 'Avoid prolonged or strenuous outdoor physical exertion', vulnerable: 'Minimise outdoor activity', chronic: 'Avoid outdoor activity' },
+  'Hazardous':      { healthy: 'Minimise outdoor activity', vulnerable: 'Avoid outdoor activity', chronic: 'Avoid outdoor activity' },
+};
+// 1-hr PM2.5 bands: for activities in the next hour. "Vulnerable" = elderly, pregnant women,
+// children, and people with chronic lung or heart disease.
+const ADVICE_PM25 = {
+  'Normal':    { everyone: 'Continue with normal activities', vulnerable: 'Continue with normal activities' },
+  'Elevated':  { everyone: 'Reduce strenuous outdoor activity for the next hour', vulnerable: 'Avoid strenuous outdoor activity for the next hour' },
+  'High':      { everyone: 'Avoid strenuous outdoor activity for the next hour', vulnerable: 'Avoid all outdoor activity for the next hour' },
+  'Very high': { everyone: 'Minimise all outdoor activity for the next hour', vulnerable: 'Avoid all outdoor activity for the next hour' },
+};
+// Malaysia API guidance. DOE's own "What to do when API reach certain levels" PDF is no longer
+// online (404 as of Oct 2026), so this is the guidance as widely reported from DOE/MOH advisories.
+// The page labels it as such.
+const ADVICE_API = {
+  'Good':           { public: 'No restrictions', risk: 'No restrictions' },
+  'Moderate':       { public: 'No restrictions', risk: 'Unusually sensitive people may notice mild effects' },
+  'Unhealthy':      { public: 'Reduce strenuous outdoor exertion', risk: 'Limit outdoor activity' },
+  'Very unhealthy': { public: 'Reduce outdoor activity; see a doctor if you have symptoms', risk: 'Stay indoors and reduce physical activity' },
+  'Hazardous':      { public: 'Avoid outdoor activity', risk: 'No outdoor activity' },
+};
+
+const SG_API = 'https://api-open.data.gov.sg/v2/real-time/api';
+const KL_LATEST = 'data/latest.json';
+const KL_HISTORY = 'data/history.json';
+const KL_STATIONS = ['CA15W', 'CA16W']; // Batu Muda, Cheras — the two DOE stations in WP Kuala Lumpur
+const REFRESH_MS = 10 * 60 * 1000;
+const TREND_HOURS = 48;
+const SG_REGIONS = ['north', 'south', 'east', 'west', 'central'];
+
+/* ===================================================================== */
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === 'class') n.className = v;
+    else if (k === 'style') n.style.cssText = v;
+    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat()) if (kid != null && kid !== false) n.append(kid.nodeType ? kid : String(kid));
+  return n;
+};
+const svgEl = (tag, attrs = {}) => {
+  const n = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const [k, v] of Object.entries(attrs)) if (v != null) n.setAttribute(k, v);
+  return n;
+};
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* storage unavailable */ } },
+};
+
+function bandFor(scale, value) {
+  if (value == null || !Number.isFinite(value)) return null;
+  const v = Math.round(value);
+  return BANDS[scale].bands.find((b) => v >= b.lo && v <= b.hi) || null;
+}
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+const fmt = (v, d = 0) => (v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-SG', { maximumFractionDigits: d, minimumFractionDigits: d }));
+
+function chip(band, { small = false, extra } = {}) {
+  if (!band) return el('span', { class: 'chip' + (small ? ' sm' : ''), style: '--c:#888' }, el('i'), 'No data');
+  return el('span', { class: 'chip' + (small ? ' sm' : ''), style: `--c:${band.color}` },
+    el('i', { 'aria-hidden': 'true' }), band.label, band.tag ? el('small', {}, band.tag) : null, extra || null);
+}
+
+/* ---------- time ---------- */
+const TZ = { sg: 'Asia/Singapore', kl: 'Asia/Kuala_Lumpur' };
+function fmtTime(ms, tz) {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false }).format(ms);
+}
+function fmtDateTime(ms, tz) {
+  return new Intl.DateTimeFormat('en-GB', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).format(ms);
+}
+function ago(ms) {
+  const m = Math.round((Date.now() - ms) / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m} min ago`;
+  const h = Math.floor(m / 60), r = m % 60;
+  if (h < 24) return r ? `${h} h ${r} min ago` : `${h} h ago`;
+  const d = Math.floor(h / 24);
+  return `${d} day${d > 1 ? 's' : ''} ago`;
+}
+function sgDate(offsetDays = 0) {
+  const d = new Date(Date.now() + 8 * 3600e3 - offsetDays * 86400e3);
+  return d.toISOString().slice(0, 10);
+}
+
+/* ---------- fetch helpers ---------- */
+async function getJson(url, { timeout = 20000 } = {}) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), timeout);
+  try {
+    const res = await fetch(url, { signal: ctl.signal, cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } finally { clearTimeout(t); }
+}
+async function sgGet(path, params = {}) {
+  // data.gov.sg v2: { code, data: { items, regionMetadata, paginationToken? }, errorMsg }
+  const items = [];
+  let token = null, guard = 0;
+  do {
+    const q = new URLSearchParams(params);
+    if (token) q.set('paginationToken', token);
+    const qs = q.toString();
+    const body = await getJson(`${SG_API}/${path}${qs ? '?' + qs : ''}`);
+    if (body.code !== 0 || !body.data) throw new Error(body.errorMsg || 'Unexpected response');
+    items.push(...(body.data.items || []));
+    token = body.data.paginationToken || null;
+  } while (token && ++guard < 10);
+  return items;
+}
+
+/* =====================================================================
+   Singapore
+   ===================================================================== */
+const sgState = { latest: null, history: null, days: {}, error: null, lastOk: null, region: null };
+
+function parseSgPsi(item) {
+  const r = item.readings;
+  return {
+    time: Date.parse(item.timestamp),
+    updated: Date.parse(item.updatedTimestamp || item.timestamp),
+    regions: SG_REGIONS.map((k) => ({
+      key: k,
+      psi: r.psi_twenty_four_hourly?.[k] ?? null,
+      pm25_24h: r.pm25_twenty_four_hourly?.[k] ?? null,
+      pm10_24h: r.pm10_twenty_four_hourly?.[k] ?? null,
+      o3_8h: r.o3_eight_hour_max?.[k] ?? null,
+      no2_1h: r.no2_one_hour_max?.[k] ?? null,
+      so2_24h: r.so2_twenty_four_hourly?.[k] ?? null,
+      co_8h: r.co_eight_hour_max?.[k] ?? null,
+      si: {
+        pm25: r.pm25_sub_index?.[k] ?? null, pm10: r.pm10_sub_index?.[k] ?? null,
+        o3: r.o3_sub_index?.[k] ?? null, so2: r.so2_sub_index?.[k] ?? null,
+        co: r.co_sub_index?.[k] ?? null, no2: r.no2_sub_index?.[k] ?? null,
+      },
+    })),
+  };
+}
+
+async function loadSg() {
+  const [psiItems, pmItems] = await Promise.all([sgGet('psi'), sgGet('pm25')]);
+  if (!psiItems.length || !pmItems.length) throw new Error('No readings returned');
+  const psi = parseSgPsi(psiItems[psiItems.length - 1]);
+  const pmItem = pmItems[pmItems.length - 1];
+  const pm = pmItem.readings.pm25_one_hourly || {};
+  psi.pmTime = Date.parse(pmItem.timestamp);
+  psi.pmUpdated = Date.parse(pmItem.updatedTimestamp || pmItem.timestamp);
+  for (const r of psi.regions) r.pm25_1h = pm[r.key] ?? null;
+  sgState.latest = psi;
+  sgState.lastOk = Date.now();
+  sgState.error = null;
+  store.set('haze:sg', { latest: psi, lastOk: sgState.lastOk });
+}
+
+// History: today's and the previous two SG calendar days, so a 48-hour window is always covered.
+async function loadSgHistory() {
+  const dates = [sgDate(2), sgDate(1), sgDate(0)];
+  for (const d of dates) {
+    const isToday = d === dates[2];
+    if (!isToday && sgState.days[d]) continue; // past days don't change
+    const [psiItems, pmItems] = await Promise.all([sgGet('psi', { date: d }), sgGet('pm25', { date: d })]);
+    const byTime = new Map();
+    for (const it of psiItems) {
+      const t = Date.parse(it.timestamp);
+      byTime.set(t, { t, psi: Object.values(it.readings.psi_twenty_four_hourly || {}).filter(Number.isFinite) });
+    }
+    for (const it of pmItems) {
+      const t = Date.parse(it.timestamp);
+      const row = byTime.get(t) || { t, psi: [] };
+      row.pm = Object.values(it.readings.pm25_one_hourly || {}).filter(Number.isFinite);
+      byTime.set(t, row);
+    }
+    sgState.days[d] = [...byTime.values()];
+  }
+  for (const k of Object.keys(sgState.days)) if (!dates.includes(k)) delete sgState.days[k];
+  const cutoff = Date.now() - TREND_HOURS * 3600e3;
+  const rows = Object.values(sgState.days).flat().filter((r) => r.t >= cutoff).sort((a, b) => a.t - b.t);
+  sgState.history = rows;
+}
+
+function renderSg() {
+  const card = $('#sg');
+  const body = $('[data-role=body]', card);
+  const L = sgState.latest;
+  card.setAttribute('aria-busy', 'false');
+  body.replaceChildren();
+
+  if (!L) {
+    setFresh(card, null, 'dead', 'no data');
+    body.append(errorNotice('Singapore', sgState.error, null));
+    return;
+  }
+  const maxBy = (k) => L.regions.reduce((a, r) => (r[k] != null && (a == null || r[k] > a[k]) ? r : a), null);
+  const scopeText = (k, worst) => {
+    const v = L.regions.map((r) => r[k]).filter(Number.isFinite);
+    if (!v.length) return 'Not reported this hour.';
+    return `Highest of ${v.length} regions (${cap(worst.key)}). Range ${Math.min(...v)}–${Math.max(...v)}.`;
+  };
+  const worstPm = maxBy('pm25_1h'), worstPsi = maxBy('psi');
+  const pmBand = bandFor('pm25sg', worstPm?.pm25_1h);
+  const psiBand = bandFor('psi', worstPsi?.psi);
+  card.style.setProperty('--band', (psiBand || pmBand)?.color || '#999');
+
+  const newest = Math.max(L.time, L.pmTime || 0);
+  freshness(card, newest, 150, sgState.error);
+  body.append(el('p', { class: 'when' },
+    `Readings for ${fmtDateTime(newest, TZ.sg)} SGT · published ${fmtTime(Math.max(L.updated, L.pmUpdated || 0), TZ.sg)}`));
+  if (sgState.error) body.append(errorNotice('Singapore', sgState.error, sgState.lastOk));
+
+  body.append(el('div', { class: 'heroes two' },
+    hero({ label: '1-hr PM2.5 · right now', value: worstPm?.pm25_1h, unit: 'µg/m³', band: pmBand,
+      scope: scopeText('pm25_1h', worstPm) }),
+    hero({ label: '24-hr PSI · health advisory', value: worstPsi?.psi, unit: 'PSI', band: psiBand,
+      scope: scopeText('psi', worstPsi) }),
+  ));
+
+  // Health guidance (NEA): 1-hr PM2.5 for the next hour, 24-hr PSI for planning ahead.
+  const a = psiBand && ADVICE_PSI[psiBand.label];
+  const n = pmBand && ADVICE_PM25[pmBand.label];
+  body.append(el('div', { class: 'advice' },
+    el('h3', {}, 'What to do'),
+    n ? el('div', { class: 'adv-group' },
+      el('p', { class: 'adv-title' }, 'Next hour', ' · ', chip(pmBand, { small: true }), el('span', { class: 'muted' }, ' 1-hr PM2.5')),
+      el('ul', {},
+        adviceRow('General public', n.everyone),
+        adviceRow('Vulnerable people*', n.vulnerable))) : null,
+    a ? el('div', { class: 'adv-group' },
+      el('p', { class: 'adv-title' }, 'Planning ahead', ' · ', chip(psiBand, { small: true }), el('span', { class: 'muted' }, ' 24-hr PSI')),
+      el('ul', {},
+        adviceRow('Healthy people', a.healthy),
+        adviceRow('Elderly, pregnant women, children', a.vulnerable),
+        adviceRow('Chronic lung or heart disease', a.chronic))) : null,
+    el('p', { class: 'src' }, '*Elderly, pregnant women, children, and people with chronic lung or heart disease. From NEA\'s haze activity guide: use 1-hr PM2.5 for the next few hours, the 24-hr PSI for next-day plans. Feeling unwell? See a doctor.'),
+  ));
+
+  // Trend
+  body.append(trendPanel('sg', [
+    { key: 'pm', label: '1-hr PM2.5', scale: 'pm25sg', unit: 'µg/m³', pick: (r) => r.pm },
+    { key: 'psi', label: '24-hr PSI', scale: 'psi', unit: 'PSI', pick: (r) => r.psi },
+  ], sgState.history, TZ.sg, 'Highest region (line) and range across the 5 regions (shading).'));
+
+  // Regions ranked
+  const regions = [...L.regions].sort((x, y) => (y.psi ?? -1) - (x.psi ?? -1) || (y.pm25_1h ?? -1) - (x.pm25_1h ?? -1));
+  const maxPsi = Math.max(200, ...regions.map((r) => r.psi || 0));
+  body.append(el('div', { class: 'panel' },
+    el('div', { class: 'panel-head' }, el('h3', {}, 'By region · worst first')),
+    el('ul', { class: 'rank' }, regions.map((r) => {
+      const b = bandFor('psi', r.psi), pb = bandFor('pm25sg', r.pm25_1h);
+      return el('li', {},
+        el('div', { class: 'nm' }, cap(r.key), el('small', {}, `${b?.label || '—'} PSI · ${pb?.label || '—'} PM2.5`)),
+        el('div', { class: 'vals' },
+          el('span', { class: 'v' }, fmt(r.psi), el('small', {}, 'PSI')),
+          el('span', { class: 'v' }, fmt(r.pm25_1h), el('small', {}, 'µg/m³ 1-hr'))),
+        el('div', { class: 'bar', 'aria-hidden': 'true' }, el('span', { style: `width:${Math.min(100, (r.psi / maxPsi) * 100)}%;--c:${b?.color || '#999'}` })));
+    })),
+  ));
+
+  // Pollutants
+  if (!sgState.region || !regions.find((r) => r.key === sgState.region)) sgState.region = regions[0].key;
+  body.append(pollutantPanel({
+    tabs: regions.map((r) => ({ id: r.key, label: cap(r.key) })),
+    selected: sgState.region,
+    onSelect: (id) => { sgState.region = id; renderSg(); },
+    rows: (() => {
+      const r = L.regions.find((x) => x.key === sgState.region);
+      return [
+        { name: 'PM2.5', per: '1-hr', conc: r.pm25_1h, unit: 'µg/m³', si: null },
+        { name: 'PM2.5', per: '24-hr mean', conc: r.pm25_24h, unit: 'µg/m³', si: r.si.pm25 },
+        { name: 'PM10', per: '24-hr mean', conc: r.pm10_24h, unit: 'µg/m³', si: r.si.pm10 },
+        { name: 'O₃ (ozone)', per: '8-hr max', conc: r.o3_8h, unit: 'µg/m³', si: r.si.o3 },
+        { name: 'NO₂', per: '1-hr max', conc: r.no2_1h, unit: 'µg/m³', si: r.si.no2 },
+        { name: 'SO₂', per: '24-hr mean', conc: r.so2_24h, unit: 'µg/m³', si: r.si.so2 },
+        { name: 'CO', per: '8-hr max', conc: r.co_8h, unit: 'mg/m³', si: r.si.co },
+      ];
+    })(),
+    siScale: 'psi',
+    siLabel: 'PSI sub-index',
+    note: 'The 24-hr PSI is the highest sub-index. NEA only reports an NO₂ sub-index when the 1-hr concentration exceeds 1130 µg/m³.',
+  }));
+}
+
+/* =====================================================================
+   Kuala Lumpur
+   ===================================================================== */
+const klState = { latest: null, history: null, error: null, lastOk: null, station: null };
+
+async function loadKl() {
+  const bust = `?t=${Math.floor(Date.now() / 60000)}`;
+  const latest = await getJson(KL_LATEST + bust);
+  if (!latest?.stations?.length) throw new Error('No stations in data file');
+  klState.latest = latest;
+  klState.lastOk = Date.now();
+  klState.error = null;
+  store.set('haze:kl', { latest, lastOk: klState.lastOk });
+  try {
+    const h = await getJson(KL_HISTORY + bust);
+    const cutoff = Date.now() - TREND_HOURS * 3600e3;
+    const byT = new Map();
+    for (const r of h.rows || []) {
+      if (r.epoch < cutoff || !KL_STATIONS.includes(r.id)) continue;
+      const row = byT.get(r.epoch) || { t: r.epoch, api: [], pm: [] };
+      if (Number.isFinite(r.api)) row.api.push(r.api);
+      if (Number.isFinite(r.pm25_1h)) row.pm.push(r.pm25_1h);
+      byT.set(r.epoch, row);
+    }
+    klState.history = [...byT.values()].sort((a, b) => a.t - b.t);
+  } catch { /* trend is optional */ }
+}
+
+function renderKl() {
+  const card = $('#kl');
+  const body = $('[data-role=body]', card);
+  const L = klState.latest;
+  card.setAttribute('aria-busy', 'false');
+  body.replaceChildren();
+
+  if (!L) {
+    setFresh(card, null, 'dead', 'no data');
+    body.append(errorNotice('Kuala Lumpur', klState.error, null));
+    return;
+  }
+  const all = L.stations.filter((s) => s.api != null);
+  const kl = all.filter((s) => KL_STATIONS.includes(s.id));
+  const worst = kl.reduce((a, s) => (a == null || s.api > a.api ? s : a), null);
+  const band = bandFor('api', worst?.api);
+  card.style.setProperty('--band', band?.color || '#999');
+
+  const newest = Math.max(...L.stations.map((s) => s.epoch));
+  freshness(card, newest, 180, klState.error);
+  body.append(el('p', { class: 'when' },
+    `Readings for ${fmtDateTime(newest, TZ.kl)} MYT · collected ${ago(Date.parse(L.fetchedAt))}`));
+  if (klState.error) body.append(errorNotice('Kuala Lumpur', klState.error, klState.lastOk));
+
+  const pmWorst = kl.reduce((a, s) => (s.pm25_1h != null && (a == null || s.pm25_1h > a.pm25_1h) ? s : a), null);
+  body.append(el('div', { class: 'heroes two' },
+    hero({ label: 'API · Air Pollutant Index', value: worst?.api, unit: 'API', band,
+      scope: `Higher of KL's 2 stations (${worst?.name}). Main pollutant: ${worst?.dominant || '—'}.` }),
+    hero({ label: '1-hr PM2.5', value: pmWorst?.pm25_1h, unit: 'µg/m³', band: null, secondary: true,
+      scope: `Higher of KL's 2 stations (${pmWorst?.name || '—'}). Malaysia has no separate 1-hr PM2.5 band; see the API for the status.` }),
+  ));
+
+  const a = band && ADVICE_API[band.label];
+  body.append(el('div', { class: 'advice' },
+    el('h3', {}, 'What to do'),
+    a ? el('div', { class: 'adv-group' },
+      el('p', { class: 'adv-title' }, 'Now', ' · ', chip(band, { small: true }), el('span', { class: 'muted' }, ' API')),
+      el('ul', {},
+        adviceRow('General public', a.public),
+        adviceRow('High-risk groups*', a.risk))) : el('p', {}, 'No current reading.'),
+    el('p', { class: 'src' }, '*Children, the elderly, pregnant women, and people with asthma, other lung disease or heart disease. Summary of Malaysian API guidance as widely published; DOE\'s original advisory document is no longer online. Follow DOE and Ministry of Health announcements.'),
+  ));
+
+  body.append(trendPanel('kl', [
+    { key: 'api', label: 'API', scale: 'api', unit: 'API', pick: (r) => r.api },
+    { key: 'pm', label: '1-hr PM2.5', scale: null, unit: 'µg/m³', pick: (r) => r.pm },
+  ], klState.history, TZ.kl, 'Higher of the two KL stations (line) and the gap between them (shading). History builds up hourly from when collection started.'));
+
+  const sorted = [...all].sort((x, y) => y.api - x.api);
+  const maxApi = Math.max(200, ...sorted.map((s) => s.api));
+  body.append(el('div', { class: 'panel' },
+    el('div', { class: 'panel-head' }, el('h3', {}, 'By station · worst first')),
+    el('ul', { class: 'rank' }, sorted.map((s) => {
+      const b = bandFor('api', s.api);
+      const isKl = KL_STATIONS.includes(s.id);
+      return el('li', {},
+        el('div', { class: 'nm' }, s.name, el('small', {}, `${isKl ? 'Kuala Lumpur' : s.state.replace(/^WP /, '') + ' · not in KL headline'} · ${b?.label || '—'}`)),
+        el('div', { class: 'vals' },
+          el('span', { class: 'v' }, fmt(s.api), el('small', {}, 'API')),
+          el('span', { class: 'v' }, fmt(s.pm25_1h), el('small', {}, 'µg/m³ 1-hr'))),
+        el('div', { class: 'bar', 'aria-hidden': 'true' }, el('span', { style: `width:${Math.min(100, (s.api / maxApi) * 100)}%;--c:${b?.color || '#999'}` })));
+    })),
+  ));
+
+  if (!klState.station || !sorted.find((s) => s.id === klState.station)) klState.station = sorted[0].id;
+  const s = sorted.find((x) => x.id === klState.station);
+  const dom = (s.dominant || '').toUpperCase().replace('.', '');
+  body.append(pollutantPanel({
+    tabs: sorted.map((x) => ({ id: x.id, label: x.name })),
+    selected: klState.station,
+    onSelect: (id) => { klState.station = id; renderKl(); },
+    rows: [
+      { name: 'PM2.5', per: '1-hr', conc: s.pm25_1h, unit: 'µg/m³', si: null },
+      { name: 'PM2.5', per: '24-hr mean', conc: s.pm25_24h, unit: 'µg/m³', si: s.subIndex.pm25, dom: dom === 'PM25' },
+      { name: 'PM10', per: '1-hr', conc: s.pm10_1h, unit: 'µg/m³', si: null },
+      { name: 'PM10', per: '24-hr mean', conc: s.pm10_24h, unit: 'µg/m³', si: s.subIndex.pm10, dom: dom === 'PM10' },
+      { name: 'O₃ (ozone)', per: '', conc: null, unit: '', si: s.subIndex.o3, dom: dom === 'O3' },
+      { name: 'NO₂', per: '', conc: null, unit: '', si: s.subIndex.no2, dom: dom === 'NO2' },
+      { name: 'SO₂', per: '', conc: null, unit: '', si: s.subIndex.so2, dom: dom === 'SO2' },
+      { name: 'CO', per: '', conc: null, unit: '', si: s.subIndex.co, dom: dom === 'CO' },
+    ],
+    siScale: 'api',
+    siLabel: 'API sub-index',
+    note: 'The API is the highest sub-index. DOE publishes gas concentrations without units in this feed, so only their sub-indices are shown. A blank sub-index means the station did not report it this hour.',
+  }));
+}
+
+/* =====================================================================
+   Shared pieces
+   ===================================================================== */
+function hero({ label, value, unit, band, scope, secondary }) {
+  return el('div', { class: 'hero' + (secondary ? ' secondary' : '') },
+    el('div', { class: 'label' }, label),
+    el('div', { class: 'figure' }, el('span', { class: 'num' }, fmt(value)), el('span', { class: 'unit' }, unit)),
+    band ? chip(band) : null,
+    el('p', { class: 'scope' }, scope));
+}
+function adviceRow(who, what) { return el('li', {}, el('b', {}, who), el('span', {}, what)); }
+
+function setFresh(card, _t, cls, text) {
+  const f = $('[data-role=fresh]', card);
+  f.className = 'fresh mono' + (cls ? ' ' + cls : '');
+  f.textContent = text;
+}
+function freshness(card, readingMs, staleAfterMin, error) {
+  const ageMin = (Date.now() - readingMs) / 60000;
+  if (error) setFresh(card, readingMs, 'dead', `offline · ${ago(readingMs)}`);
+  else if (ageMin > staleAfterMin) setFresh(card, readingMs, 'stale', `stale · ${ago(readingMs)}`);
+  else setFresh(card, readingMs, '', `reading ${ago(readingMs)}`);
+}
+function errorNotice(city, error, lastOk) {
+  return el('div', { class: 'notice err', role: 'status' },
+    el('strong', {}, `Couldn't load ${city} just now`),
+    lastOk ? ` — showing data last fetched ${fmtDateTime(lastOk, TZ.sg)} (${ago(lastOk)}).` : '. No earlier data saved on this device.',
+    error ? el('span', { class: 'muted' }, ` (${error})`) : null);
+}
+
+function pollutantPanel({ tabs, selected, onSelect, rows, siScale, siLabel, note }) {
+  const tabList = el('div', { class: 'tabs', role: 'tablist', 'aria-label': 'Location' },
+    tabs.map((t) => el('button', { type: 'button', role: 'tab', 'aria-selected': String(t.id === selected), onclick: () => onSelect(t.id) }, t.label)));
+  const maxSi = Math.max(150, ...rows.map((r) => r.si || 0));
+  return el('div', { class: 'panel' },
+    el('div', { class: 'panel-head' }, el('h3', {}, 'Pollutants')),
+    tabList,
+    el('table', { class: 'poll' },
+      el('thead', {}, el('tr', {}, el('th', {}, 'Pollutant'), el('th', { class: 'n' }, 'Concentration'), el('th', { class: 'n' }, siLabel))),
+      el('tbody', {}, rows.map((r) => {
+        const b = bandFor(siScale, r.si);
+        return el('tr', { class: r.dom ? 'dom' : null },
+          el('td', {}, r.name, r.per ? el('span', { class: 'per' }, r.per) : null),
+          el('td', { class: 'n' }, r.conc == null ? '—' : `${fmt(r.conc, r.unit === 'mg/m³' ? 1 : 0)} ${r.unit}`),
+          el('td', { class: 'n' }, r.si == null ? '—' : el('span', { class: 'si' },
+            el('span', { class: 'meter', 'aria-hidden': 'true' }, el('span', { style: `width:${Math.min(100, r.si / maxSi * 100)}%;--c:${b?.color || '#999'}` })),
+            el('span', {}, fmt(r.si)), el('span', { class: 'sr-only' }, b ? `, ${b.label}` : ''))));
+      }))),
+    el('p', { class: 'foot-note' }, note));
+}
+
+/* ---------- trend chart ---------- */
+const trendChoice = { sg: store.get('haze:trend:sg') || 'pm', kl: store.get('haze:trend:kl') || 'api' };
+
+function trendPanel(city, metrics, rows, tz, caption) {
+  const choice = metrics.find((m) => m.key === trendChoice[city]) || metrics[0];
+  const seg = el('div', { class: 'seg', role: 'group', 'aria-label': 'Trend metric' },
+    metrics.map((m) => el('button', {
+      type: 'button', 'aria-pressed': String(m === choice),
+      onclick: () => { trendChoice[city] = m.key; store.set(`haze:trend:${city}`, m.key); (city === 'sg' ? renderSg : renderKl)(); },
+    }, m.label)));
+  const panel = el('div', { class: 'panel' },
+    el('div', { class: 'panel-head' }, el('h3', {}, `Last ${TREND_HOURS} hours`), seg));
+
+  const pts = (rows || []).map((r) => {
+    const v = choice.pick(r) || [];
+    return v.length ? { t: r.t, max: Math.max(...v), min: Math.min(...v) } : null;
+  }).filter(Boolean);
+
+  if (pts.length < 2) {
+    panel.append(el('div', { class: 'chart-empty' }, rows == null
+      ? 'Trend unavailable right now.'
+      : `Not enough history yet (${pts.length} hourly reading${pts.length === 1 ? '' : 's'}). It fills in as readings arrive each hour.`));
+    return panel;
+  }
+  const holder = el('div', { class: 'chart' });
+  panel.append(holder, el('p', { class: 'foot-note' }, caption));
+  // table view
+  panel.append(el('details', { class: 'table-view' },
+    el('summary', {}, 'Show as table'),
+    el('div', { class: 'scroll' }, el('table', {},
+      el('thead', {}, el('tr', {}, el('th', {}, 'Time'), el('th', {}, `Highest (${choice.unit})`), el('th', {}, 'Lowest'))),
+      el('tbody', {}, [...pts].reverse().map((p) => el('tr', {}, el('td', {}, fmtDateTime(p.t, tz)), el('td', {}, fmt(p.max)), el('td', {}, fmt(p.min)))))))));
+  requestAnimationFrame(() => drawChart(holder, pts, choice, tz));
+  const ro = new ResizeObserver(() => drawChart(holder, pts, choice, tz));
+  ro.observe(holder);
+  return panel;
+}
+
+function drawChart(holder, pts, metric, tz) {
+  const W = Math.max(280, Math.round(holder.clientWidth || 600));
+  if (holder._w === W && holder.firstChild) return;
+  holder._w = W;
+  const H = W < 480 ? 210 : 240;
+  const m = { t: 12, r: W < 520 ? 66 : 92, b: 26, l: 34 };
+  const iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const t1 = Date.now(), t0 = t1 - TREND_HOURS * 3600e3;
+  const vmaxData = Math.max(...pts.map((p) => p.max));
+  const scale = metric.scale ? BANDS[metric.scale] : null;
+  // y top: next band boundary above the data, so the current band is always visible in full
+  let ymax = Math.max(60, vmaxData * 1.1);
+  if (scale) {
+    const b = scale.bands.find((b) => vmaxData <= b.hi);
+    if (b && Number.isFinite(b.hi)) ymax = Math.max(b.hi + (b.hi < 100 ? 10 : 20), vmaxData * 1.08);
+  }
+  ymax = niceCeil(ymax);
+  const x = (t) => m.l + ((t - t0) / (t1 - t0)) * iw;
+  const y = (v) => m.t + ih - (v / ymax) * ih;
+
+  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', tabindex: '0',
+    'aria-label': `${metric.label} over the last ${TREND_HOURS} hours, latest ${fmt(pts[pts.length - 1].max)} ${metric.unit}. Use left and right arrow keys to read values.` });
+
+  // band zones
+  if (scale) {
+    for (const b of scale.bands) {
+      const lo = Math.max(0, b.lo === 0 ? 0 : b.lo - 0.5), hi = Math.min(ymax, Number.isFinite(b.hi) ? b.hi + 0.5 : ymax);
+      if (lo >= ymax) continue;
+      svg.append(svgEl('rect', { x: m.l, y: y(hi), width: iw, height: y(lo) - y(hi), fill: b.color, 'fill-opacity': getComputedStyle(document.documentElement).getPropertyValue('--zone-alpha').trim() || .16 }));
+      if (y(lo) - y(hi) > 14) {
+        const lbl = svgEl('text', { class: 'zone-label', x: m.l + iw + 6, y: (y(lo) + y(hi)) / 2 + 3.5 });
+        lbl.textContent = W < 520 && b.label.includes(' ') ? b.label.replace(/^(\w)\w+ /, '$1. ') : b.label;
+        svg.append(lbl);
+      }
+    }
+  }
+  // grid + y axis
+  const ticks = niceTicks(ymax);
+  const grid = svgEl('g', { class: 'grid' }), axis = svgEl('g', { class: 'axis' });
+  for (const v of ticks) {
+    grid.append(svgEl('line', { x1: m.l, x2: m.l + iw, y1: y(v), y2: y(v) }));
+    const tx = svgEl('text', { x: m.l - 6, y: y(v) + 3.5, 'text-anchor': 'end' }); tx.textContent = v; axis.append(tx);
+  }
+  // x axis: every 6 h (12 on narrow)
+  const step = (W < 480 ? 12 : 6) * 3600e3;
+  const firstTick = Math.ceil(t0 / step) * step;
+  for (let t = firstTick; t <= t1; t += step) {
+    const tx = svgEl('text', { x: x(t), y: H - 6, 'text-anchor': 'middle' });
+    const hh = fmtTime(t, tz);
+    tx.textContent = hh === '00:00' ? new Intl.DateTimeFormat('en-GB', { timeZone: tz, day: 'numeric', month: 'short' }).format(t) : hh;
+    axis.append(tx);
+  }
+  svg.append(grid, axis);
+
+  // range wash + line (break segments across gaps > 2h)
+  const segs = [];
+  let cur = [];
+  for (const p of pts) {
+    if (cur.length && p.t - cur[cur.length - 1].t > 2.5 * 3600e3) { segs.push(cur); cur = []; }
+    cur.push(p);
+  }
+  if (cur.length) segs.push(cur);
+  for (const s of segs) {
+    if (s.length > 1) {
+      const top = s.map((p) => `${x(p.t).toFixed(1)},${y(p.max).toFixed(1)}`);
+      const bot = s.slice().reverse().map((p) => `${x(p.t).toFixed(1)},${y(p.min).toFixed(1)}`);
+      svg.append(svgEl('polygon', { class: 'wash', points: top.concat(bot).join(' ') }));
+      svg.append(svgEl('polyline', { class: 'line', points: top.join(' ') }));
+    } else {
+      svg.append(svgEl('circle', { class: 'end', cx: x(s[0].t), cy: y(s[0].max), r: 3 }));
+    }
+  }
+  const last = pts[pts.length - 1];
+  svg.append(svgEl('circle', { class: 'end', cx: x(last.t), cy: y(last.max), r: 4.5 }));
+  const endLbl = svgEl('text', { class: 'end-label', x: x(last.t) - 8, y: y(last.max) - 10, 'text-anchor': 'end' });
+  endLbl.textContent = fmt(last.max);
+  svg.append(endLbl);
+
+  // hover layer
+  const xh = svgEl('line', { class: 'xhair', y1: m.t, y2: m.t + ih, visibility: 'hidden' });
+  const xd = svgEl('circle', { class: 'xdot', r: 4.5, visibility: 'hidden' });
+  const hit = svgEl('rect', { x: m.l, y: m.t, width: iw, height: ih, fill: 'transparent' });
+  svg.append(xh, xd, hit);
+  const tip = el('div', { class: 'tip', role: 'status', 'aria-live': 'polite' });
+  let idx = pts.length - 1;
+  const show = (i) => {
+    idx = Math.max(0, Math.min(pts.length - 1, i));
+    const p = pts[idx];
+    xh.setAttribute('x1', x(p.t)); xh.setAttribute('x2', x(p.t)); xh.setAttribute('visibility', 'visible');
+    xd.setAttribute('cx', x(p.t)); xd.setAttribute('cy', y(p.max)); xd.setAttribute('visibility', 'visible');
+    const b = metric.scale ? bandFor(metric.scale, p.max) : null;
+    tip.replaceChildren(el('b', {}, `${fmt(p.max)} ${metric.unit}`), b ? ` ${b.label}` : '', el('br'),
+      el('span', { class: 'dim' }, `${fmtDateTime(p.t, tz)}${p.min !== p.max ? ` · low ${fmt(p.min)}` : ''}`));
+    const scaleX = holder.clientWidth / W;
+    const px = x(p.t) * scaleX;
+    tip.style.left = `${Math.max(70, Math.min(holder.clientWidth - 70, px))}px`;
+    tip.style.top = `${y(p.max) * scaleX - 10}px`;
+    tip.style.opacity = 1;
+  };
+  const hide = () => { xh.setAttribute('visibility', 'hidden'); xd.setAttribute('visibility', 'hidden'); tip.style.opacity = 0; };
+  const nearest = (evt) => {
+    const r = svg.getBoundingClientRect();
+    const t = t0 + (((evt.clientX - r.left) * (W / r.width) - m.l) / iw) * (t1 - t0);
+    let best = 0;
+    for (let i = 1; i < pts.length; i++) if (Math.abs(pts[i].t - t) < Math.abs(pts[best].t - t)) best = i;
+    return best;
+  };
+  svg.addEventListener('pointermove', (e) => show(nearest(e)));
+  svg.addEventListener('pointerdown', (e) => show(nearest(e)));
+  svg.addEventListener('pointerleave', hide);
+  svg.addEventListener('focus', () => show(idx));
+  svg.addEventListener('blur', hide);
+  svg.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { show(idx - 1); e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { show(idx + 1); e.preventDefault(); }
+    else if (e.key === 'Escape') hide();
+  });
+  holder.replaceChildren(svg, tip);
+}
+function niceCeil(v) {
+  const steps = [50, 60, 80, 100, 120, 150, 200, 250, 300, 350, 400, 500];
+  return steps.find((s) => s >= v) || Math.ceil(v / 100) * 100;
+}
+function niceTicks(max) {
+  const step = max <= 80 ? 20 : max <= 160 ? 40 : max <= 300 ? 50 : 100;
+  const out = [];
+  for (let v = 0; v <= max; v += step) out.push(v);
+  return out;
+}
+
+/* ---------- comparison ---------- */
+function renderCompare() {
+  const host = $('#compare');
+  const sg = sgState.latest, kl = klState.latest;
+  const sgMax = (k) => sg ? Math.max(...sg.regions.map((r) => r[k]).filter(Number.isFinite)) : null;
+  const klS = kl ? kl.stations.filter((s) => KL_STATIONS.includes(s.id)) : [];
+  const klMax = (k) => klS.length ? Math.max(...klS.map((s) => s[k]).filter(Number.isFinite)) : null;
+  const groups = [
+    { title: '1-hour PM2.5 (µg/m³)', rows: [
+      { who: 'Singapore', sub: 'highest region', v: sgMax('pm25_1h') },
+      { who: 'Kuala Lumpur', sub: 'higher station', v: klMax('pm25_1h') },
+    ] },
+    { title: '24-hour mean PM2.5 (µg/m³)', rows: [
+      { who: 'Singapore', sub: 'highest region', v: sgMax('pm25_24h') },
+      { who: 'Kuala Lumpur', sub: 'higher station', v: klMax('pm25_24h') },
+    ] },
+  ];
+  const all = groups.flatMap((g) => g.rows.map((r) => r.v)).filter(Number.isFinite);
+  const top = niceCeil(Math.max(100, ...all) * 1.05);
+  const mid = Math.round(top / 2);
+  host.replaceChildren(...groups.map((g) => el('div', { class: 'cmp' },
+    el('h3', {}, g.title),
+    g.rows.map((r) => el('div', { class: 'cmp-row' },
+      el('div', { class: 'who' }, r.who, el('small', {}, r.sub)),
+      el('div', { class: 'track', 'aria-hidden': 'true' }, el('span', { style: `width:${r.v == null ? 0 : Math.min(100, r.v / top * 100)}%` })),
+      el('div', { class: 'val' }, r.v == null ? '—' : fmt(r.v), el('small', {}, 'µg/m³')))),
+    el('div', { class: 'cmp-axis', 'aria-hidden': 'true' }, el('span'), el('div', {}, el('span', {}, '0'), el('span', {}, mid), el('span', {}, top)), el('span')))));
+}
+
+/* ---------- scales reference ---------- */
+function renderScales() {
+  const notes = {
+    psi: 'NEA\'s health advisory and next-day planning. The highest of six pollutant sub-indices, usually PM2.5 during haze. Colours from haze.gov.sg.',
+    pm25sg: 'NEA\'s guide for the next hour. Not a PSI value; the bands are concentrations. NEA doesn\'t assign colours to these bands; the ones here are this page\'s, taken from NEA\'s PSI palette.',
+    api: 'Malaysia\'s hourly index: the highest pollutant sub-index. Colours from DOE\'s APIMS portal. Note DOE uses blue for Good and green for Moderate, the reverse of NEA.',
+  };
+  $('#scales').replaceChildren(...['psi', 'pm25sg', 'api'].map((k) => {
+    const s = BANDS[k];
+    return el('div', { class: 'scale' },
+      el('h3', {}, s.name + (s.unit ? ` (${s.unit})` : '')),
+      el('p', { class: 'who' }, s.agency),
+      el('ol', {}, s.bands.map((b) => el('li', {},
+        el('i', { style: `background:${b.color}`, 'aria-hidden': 'true' }),
+        el('span', { class: 'rng' }, Number.isFinite(b.hi) ? `${b.lo}–${b.hi}` : `${b.lo}+`),
+        el('span', {}, b.label, b.tag ? el('span', { class: 'muted' }, ` · ${b.tag}`) : '')))),
+      el('p', { class: 'note' }, notes[k]));
+  }));
+}
+
+/* =====================================================================
+   Refresh loop
+   ===================================================================== */
+let lastRun = 0, timer = null, running = false;
+
+async function refresh() {
+  if (running) return;
+  running = true;
+  const btn = $('#refreshBtn');
+  btn.setAttribute('aria-busy', 'true');
+  $('#sg').setAttribute('aria-busy', 'true');
+  $('#kl').setAttribute('aria-busy', 'true');
+
+  const sgJob = (async () => {
+    const prevTime = sgState.latest?.time;
+    try { await loadSg(); } catch (e) { sgState.error = errText(e); }
+    if (!sgState.history || sgState.latest?.time !== prevTime) {
+      try { await loadSgHistory(); } catch { /* keep the previous trend */ }
+    }
+    renderSg();
+  })();
+  const klJob = (async () => {
+    try { await loadKl(); } catch (e) { klState.error = errText(e); }
+    renderKl();
+  })();
+  await Promise.allSettled([sgJob, klJob]);
+  renderCompare();
+  lastRun = Date.now();
+  running = false;
+  btn.removeAttribute('aria-busy');
+  schedule();
+}
+function errText(e) { return e?.name === 'AbortError' ? 'timed out' : (e?.message || 'network error'); }
+function schedule() {
+  clearTimeout(timer);
+  timer = setTimeout(() => { if (document.visibilityState === 'visible') refresh(); }, REFRESH_MS);
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && Date.now() - lastRun > REFRESH_MS) refresh();
+});
+setInterval(() => {
+  if (!lastRun) return;
+  const left = Math.max(0, REFRESH_MS - (Date.now() - lastRun));
+  $('#nextRefresh').textContent = `next update in ${Math.ceil(left / 60000)} min`;
+  // keep "x min ago" honest between refreshes
+  if (sgState.latest) freshness($('#sg'), Math.max(sgState.latest.time, sgState.latest.pmTime || 0), 150, sgState.error);
+  if (klState.latest) freshness($('#kl'), Math.max(...klState.latest.stations.map((s) => s.epoch)), 180, klState.error);
+}, 30000);
+$('#refreshBtn').addEventListener('click', () => refresh());
+
+/* ---------- theme ---------- */
+const THEMES = ['auto', 'light', 'dark'];
+function applyTheme(t) {
+  if (t === 'auto') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', t);
+  $('#themeBtn').textContent = `Theme: ${t}`;
+  // chart zone opacity comes from CSS vars; redraw charts so they pick it up
+  document.querySelectorAll('.chart').forEach((c) => { c._w = 0; });
+  if (sgState.latest) renderSg();
+  if (klState.latest) renderKl();
+}
+let theme = store.get('haze:theme') || 'auto';
+$('#themeBtn').addEventListener('click', () => {
+  theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+  store.set('haze:theme', theme);
+  applyTheme(theme);
+});
+if (theme !== 'auto') document.documentElement.setAttribute('data-theme', theme);
+$('#themeBtn').textContent = `Theme: ${theme}`;
+
+/* ---------- boot: show cached data immediately, then fetch ---------- */
+(() => {
+  const sg = store.get('haze:sg'), kl = store.get('haze:kl');
+  if (sg?.latest) { sgState.latest = sg.latest; sgState.lastOk = sg.lastOk; renderSg(); $('#sg').setAttribute('aria-busy', 'true'); }
+  if (kl?.latest) { klState.latest = kl.latest; klState.lastOk = kl.lastOk; renderKl(); $('#kl').setAttribute('aria-busy', 'true'); }
+  renderScales();
+  refresh();
+})();
+</script>
+</body>
+</html>
