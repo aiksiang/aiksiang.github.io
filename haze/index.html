@@ -421,6 +421,9 @@ const ADVICE_API = {
 };
 
 const SG_API = 'https://api-open.data.gov.sg/v2/real-time/api';
+// Cloudflare Worker that serves DOE data with CORS (see worker/). Empty = not deployed yet;
+// the page then uses the snapshot files written by GitHub Actions.
+const KL_WORKER = '';
 const KL_LATEST = 'data/latest.json';
 const KL_HISTORY = 'data/history.json';
 const KL_STATIONS = ['CA15W', 'CA16W']; // Batu Muda, Cheras — the two DOE stations in WP Kuala Lumpur
@@ -690,27 +693,49 @@ function renderSg() {
    ===================================================================== */
 const klState = { latest: null, history: null, error: null, lastOk: null, station: null };
 
+// Newest reading time across stations, for picking the fresher of two sources.
+const klNewest = (d) => Math.max(0, ...(d?.stations || []).map((x) => x.epoch || 0));
+
 async function loadKl() {
   const bust = `?t=${Math.floor(Date.now() / 60000)}`;
-  const latest = await getJson(KL_LATEST + bust);
-  if (!latest?.stations?.length) throw new Error('No stations in data file');
+  // Live from the Worker first; the Actions snapshot as fallback (or if it's somehow newer).
+  const [live, snap] = await Promise.allSettled([
+    KL_WORKER ? getJson(`${KL_WORKER}/kl`, { timeout: 15000 }) : Promise.reject(new Error('no worker')),
+    getJson(KL_LATEST + bust),
+  ]);
+  const liveOk = live.status === 'fulfilled' && live.value?.stations?.length ? live.value : null;
+  const snapOk = snap.status === 'fulfilled' && snap.value?.stations?.length ? snap.value : null;
+  let latest = liveOk;
+  if (!latest || (snapOk && klNewest(snapOk) > klNewest(latest))) latest = snapOk && { ...snapOk, via: 'snapshot' };
+  if (!latest) throw new Error(errText(live.reason || snap.reason));
+  if (latest === liveOk) latest = { ...liveOk, via: liveOk.live === false ? 'worker-stored' : 'live' };
   klState.latest = latest;
   klState.lastOk = Date.now();
   klState.error = null;
   store.set('haze:kl', { latest, lastOk: klState.lastOk });
-  try {
-    const h = await getJson(KL_HISTORY + bust);
-    const cutoff = Date.now() - TREND_HOURS * 3600e3;
-    const byT = new Map();
-    for (const r of h.rows || []) {
-      if (r.epoch < cutoff || !KL_STATIONS.includes(r.id)) continue;
-      const row = byT.get(r.epoch) || { t: r.epoch, api: [], pm: [] };
-      if (Number.isFinite(r.api)) row.api.push(r.api);
-      if (Number.isFinite(r.pm25_1h)) row.pm.push(r.pm25_1h);
-      byT.set(r.epoch, row);
-    }
-    klState.history = [...byT.values()].sort((a, b) => a.t - b.t);
-  } catch { /* trend is optional */ }
+
+  // Trend: union of the Worker's history (cron-recorded) and the snapshot history.
+  const [hw, hs] = await Promise.allSettled([
+    KL_WORKER ? getJson(`${KL_WORKER}/kl/history`, { timeout: 15000 }) : Promise.reject(new Error('no worker')),
+    getJson(KL_HISTORY + bust),
+  ]);
+  const rows = [hw, hs].flatMap((r) => (r.status === 'fulfilled' ? r.value?.rows || [] : []));
+  // the latest reading itself, so the line reaches "now" even between recordings
+  for (const st of latest.stations) rows.push({ id: st.id, epoch: st.epoch, api: st.api, pm25_1h: st.pm25_1h });
+  if (hw.status === 'rejected' && hs.status === 'rejected') return; // keep the previous trend
+  const cutoff = Date.now() - TREND_HOURS * 3600e3;
+  const seen = new Set();
+  const byT = new Map();
+  for (const r of rows) {
+    const key = `${r.id}@${r.epoch}`;
+    if (seen.has(key) || r.epoch < cutoff || !KL_STATIONS.includes(r.id)) continue;
+    seen.add(key);
+    const row = byT.get(r.epoch) || { t: r.epoch, api: [], pm: [] };
+    if (Number.isFinite(r.api)) row.api.push(r.api);
+    if (Number.isFinite(r.pm25_1h)) row.pm.push(r.pm25_1h);
+    byT.set(r.epoch, row);
+  }
+  klState.history = [...byT.values()].sort((a, b) => a.t - b.t);
 }
 
 function renderKl() {
@@ -734,7 +759,11 @@ function renderKl() {
   const newest = Math.max(...L.stations.map((s) => s.epoch));
   freshness(card, newest, 180, klState.error);
   body.append(el('p', { class: 'when' },
-    `Readings for ${fmtDateTime(newest, TZ.kl)} MYT · collected ${ago(Date.parse(L.fetchedAt))}`));
+    `Readings for ${fmtDateTime(newest, TZ.kl)} MYT · ${{
+      live: 'live from DOE',
+      'worker-stored': `DOE not responding; last stored ${ago(Date.parse(L.fetchedAt))}`,
+      snapshot: `hourly snapshot from ${ago(Date.parse(L.fetchedAt))}`,
+    }[L.via] || `collected ${ago(Date.parse(L.fetchedAt))}`}`));
   if (klState.error) body.append(errorNotice('Kuala Lumpur', klState.error, klState.lastOk));
 
   const pmWorst = kl.reduce((a, s) => (s.pm25_1h != null && (a == null || s.pm25_1h > a.pm25_1h) ? s : a), null);
