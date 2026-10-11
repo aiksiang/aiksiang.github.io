@@ -1,78 +1,78 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-10-11T15:37:20.107Z",
+ "fetchedAt": "2026-10-11T19:42:52.794Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-11T23:00:00+08:00",
-   "epoch": 1791730800000,
-   "api": 77,
+   "time": "2026-10-12T03:00:00+08:00",
+   "epoch": 1791745200000,
+   "api": 73,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 77,
-    "pm10": 38,
-    "o3": 18,
-    "no2": 8,
+    "pm25": 73,
+    "pm10": 34,
+    "o3": 8,
+    "no2": 9,
     "so2": 1,
-    "co": 3
+    "co": 4
    },
-   "pm25_1h": 9.9,
-   "pm25_24h": 32.3,
-   "pm10_1h": 16.1,
-   "pm10_24h": 40.6
+   "pm25_1h": 17.7,
+   "pm25_24h": 29.4,
+   "pm10_1h": 26.2,
+   "pm10_24h": 37.1
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-11T23:00:00+08:00",
-   "epoch": 1791730800000,
-   "api": 99,
+   "time": "2026-10-12T03:00:00+08:00",
+   "epoch": 1791745200000,
+   "api": 98,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 99,
-    "pm10": 51,
-    "o3": 37,
-    "no2": 10,
+    "pm25": 98,
+    "pm10": 49,
+    "o3": 16,
+    "no2": 14,
     "so2": 1,
-    "co": 10
+    "co": 13
    },
-   "pm25_1h": 47.7,
-   "pm25_24h": 49.9,
-   "pm10_1h": 56.3,
-   "pm10_24h": 54.5
+   "pm25_1h": 64.8,
+   "pm25_24h": 48.8,
+   "pm10_1h": 74,
+   "pm10_24h": 53.4
   },
   {
    "id": "CA17W",
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-10-11T23:00:00+08:00",
-   "epoch": 1791730800000,
-   "api": 86,
+   "time": "2026-10-12T03:00:00+08:00",
+   "epoch": 1791745200000,
+   "api": 94,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 86,
-    "pm10": 41,
-    "o3": 33,
-    "no2": 9,
+    "pm25": 94,
+    "pm10": 46,
+    "o3": 19,
+    "no2": 17,
     "so2": 3,
-    "co": 13
+    "co": 14
    },
-   "pm25_1h": 35.7,
-   "pm25_24h": 39.6,
-   "pm10_1h": 40.4,
-   "pm10_24h": 43.8
+   "pm25_1h": 62.3,
+   "pm25_24h": 45.5,
+   "pm10_1h": 69,
+   "pm10_24h": 49.9
   }
  ]
 }
