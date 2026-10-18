@@ -1,78 +1,78 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-10-18T11:42:14.225Z",
+ "fetchedAt": "2026-10-18T14:50:20.567Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-18T19:00:00+08:00",
-   "epoch": 1792321200000,
-   "api": 156,
+   "time": "2026-10-18T22:00:00+08:00",
+   "epoch": 1792332000000,
+   "api": 158,
    "cls": "Unhealthy",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 156,
-    "pm10": 60,
-    "o3": 28,
-    "no2": 9,
+    "pm25": 158,
+    "pm10": 62,
+    "o3": 21,
+    "no2": 15,
     "so2": 1,
     "co": 6
    },
-   "pm25_1h": 84.5,
-   "pm25_24h": 65.3,
-   "pm10_1h": 92.6,
-   "pm10_24h": 73.8
+   "pm25_1h": 91.8,
+   "pm25_24h": 68.7,
+   "pm10_1h": 106,
+   "pm10_24h": 77.7
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-18T19:00:00+08:00",
-   "epoch": 1792321200000,
-   "api": 154,
-   "cls": "Unhealthy",
-   "dominant": "PM2.5",
-   "status": 1,
-   "subIndex": {
-    "pm25": 154,
-    "pm10": 59,
-    "o3": 61,
-    "no2": 13,
-    "so2": 3,
-    "co": 15
-   },
-   "pm25_1h": 57.9,
-   "pm25_24h": 61.6,
-   "pm10_1h": 65.7,
-   "pm10_24h": 71.4
-  },
-  {
-   "id": "CA17W",
-   "name": "Putrajaya",
-   "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
-   "state": "WP Putrajaya",
-   "time": "2026-10-18T19:00:00+08:00",
-   "epoch": 1792321200000,
+   "time": "2026-10-18T22:00:00+08:00",
+   "epoch": 1792332000000,
    "api": 155,
    "cls": "Unhealthy",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
     "pm25": 155,
-    "pm10": 58,
-    "o3": 50,
-    "no2": 11,
+    "pm10": 60,
+    "o3": 35,
+    "no2": 35,
     "so2": 3,
     "co": 17
    },
-   "pm25_1h": 68.3,
-   "pm25_24h": 62.6,
-   "pm10_1h": 74.9,
-   "pm10_24h": 69.7
+   "pm25_1h": 65.2,
+   "pm25_24h": 63.5,
+   "pm10_1h": 78.3,
+   "pm10_24h": 73.6
+  },
+  {
+   "id": "CA17W",
+   "name": "Putrajaya",
+   "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
+   "state": "WP Putrajaya",
+   "time": "2026-10-18T22:00:00+08:00",
+   "epoch": 1792332000000,
+   "api": 156,
+   "cls": "Unhealthy",
+   "dominant": "PM2.5",
+   "status": 1,
+   "subIndex": {
+    "pm25": 156,
+    "pm10": 59,
+    "o3": 37,
+    "no2": 18,
+    "so2": 3,
+    "co": 18
+   },
+   "pm25_1h": 64.9,
+   "pm25_24h": 64.8,
+   "pm10_1h": 72.9,
+   "pm10_24h": 72.2
   }
  ]
 }
