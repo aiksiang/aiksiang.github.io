@@ -1,78 +1,78 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-10-26T23:08:39.194Z",
+ "fetchedAt": "2026-10-27T02:01:50.299Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-27T07:00:00+08:00",
-   "epoch": 1793055600000,
-   "api": 82,
+   "time": "2026-10-27T10:00:00+08:00",
+   "epoch": 1793066400000,
+   "api": 89,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 82,
-    "pm10": 38,
-    "o3": 4,
+    "pm25": 89,
+    "pm10": 44,
+    "o3": 3,
     "no2": 9,
-    "so2": 3,
-    "co": 5
+    "so2": 1,
+    "co": 6
    },
-   "pm25_1h": 34.8,
-   "pm25_24h": 36.1,
-   "pm10_1h": 42.5,
-   "pm10_24h": 40.8
+   "pm25_1h": 98,
+   "pm25_24h": 42,
+   "pm10_1h": 108.7,
+   "pm10_24h": 47.3
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-27T07:00:00+08:00",
-   "epoch": 1793055600000,
-   "api": 57,
-   "cls": "Moderate",
-   "dominant": "PM2.5",
+   "time": "1970-01-01T00:00:00+08:00",
+   "epoch": -28800000,
+   "api": null,
+   "cls": null,
+   "dominant": null,
    "status": 1,
    "subIndex": {
-    "pm25": 57,
-    "pm10": 22,
-    "o3": 12,
-    "no2": 11,
-    "so2": 4,
-    "co": 10
+    "pm25": null,
+    "pm10": null,
+    "o3": null,
+    "no2": null,
+    "so2": null,
+    "co": null
    },
-   "pm25_1h": 19.8,
-   "pm25_24h": 16.6,
-   "pm10_1h": 27.2,
-   "pm10_24h": 23.7
+   "pm25_1h": null,
+   "pm25_24h": null,
+   "pm10_1h": null,
+   "pm10_24h": null
   },
   {
    "id": "CA17W",
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-10-27T07:00:00+08:00",
-   "epoch": 1793055600000,
-   "api": 53,
+   "time": "2026-10-27T10:00:00+08:00",
+   "epoch": 1793066400000,
+   "api": 55,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 53,
-    "pm10": 18,
-    "o3": 14,
-    "no2": 7,
-    "so2": 6,
-    "co": 8
+    "pm25": 55,
+    "pm10": 20,
+    "o3": 13,
+    "no2": null,
+    "so2": 1,
+    "co": 7
    },
-   "pm25_1h": 17.4,
-   "pm25_24h": 13.6,
-   "pm10_1h": 24.5,
-   "pm10_24h": 18.9
+   "pm25_1h": 23.8,
+   "pm25_24h": 15.4,
+   "pm10_1h": 31.5,
+   "pm10_24h": 21.4
   }
  ]
 }
