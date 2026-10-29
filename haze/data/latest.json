@@ -1,38 +1,38 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-10-29T13:42:44.114Z",
+ "fetchedAt": "2026-10-29T19:13:38.678Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-29T21:00:00+08:00",
-   "epoch": 1793278800000,
-   "api": 85,
+   "time": "2026-10-30T03:00:00+08:00",
+   "epoch": 1793300400000,
+   "api": 83,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 85,
-    "pm10": 42,
-    "o3": 9,
-    "no2": 8,
+    "pm25": 83,
+    "pm10": 40,
+    "o3": 5,
+    "no2": 5,
     "so2": 1,
     "co": 2
    },
-   "pm25_1h": 42.3,
-   "pm25_24h": 38.7,
-   "pm10_1h": 43.4,
-   "pm10_24h": 45.2
+   "pm25_1h": 29.2,
+   "pm25_24h": 36.9,
+   "pm10_1h": 35.7,
+   "pm10_24h": 42.9
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-29T21:00:00+08:00",
-   "epoch": 1793278800000,
+   "time": "2026-10-30T03:00:00+08:00",
+   "epoch": 1793300400000,
    "api": 55,
    "cls": "Moderate",
    "dominant": "PM2.5",
@@ -40,14 +40,14 @@
    "subIndex": {
     "pm25": 55,
     "pm10": 22,
-    "o3": 20,
-    "no2": 11,
+    "o3": 6,
+    "no2": 6,
     "so2": 1,
-    "co": 6
+    "co": 8
    },
-   "pm25_1h": 13.3,
+   "pm25_1h": 12.7,
    "pm25_24h": 15.2,
-   "pm10_1h": 18,
+   "pm10_1h": 23.9,
    "pm10_24h": 23.4
   },
   {
@@ -55,8 +55,8 @@
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-10-29T21:00:00+08:00",
-   "epoch": 1793278800000,
+   "time": "2026-10-30T03:00:00+08:00",
+   "epoch": 1793300400000,
    "api": 53,
    "cls": "Moderate",
    "dominant": "PM2.5",
@@ -64,15 +64,15 @@
    "subIndex": {
     "pm25": 53,
     "pm10": 19,
-    "o3": 23,
-    "no2": 9,
+    "o3": 8,
+    "no2": 5,
     "so2": 1,
-    "co": 6
+    "co": 9
    },
-   "pm25_1h": 10.6,
-   "pm25_24h": 13.6,
-   "pm10_1h": 13.8,
-   "pm10_24h": 20.6
+   "pm25_1h": 11,
+   "pm25_24h": 13.3,
+   "pm10_1h": 19.1,
+   "pm10_24h": 20.1
   }
  ]
 }
