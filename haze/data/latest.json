@@ -1,78 +1,78 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-10-31T00:44:41.894Z",
+ "fetchedAt": "2026-10-31T06:20:01.807Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-10-31T08:00:00+08:00",
-   "epoch": 1793404800000,
-   "api": 83,
-   "cls": "Moderate",
-   "dominant": "PM2.5",
-   "status": 1,
-   "subIndex": {
-    "pm25": 83,
-    "pm10": 41,
-    "o3": 2,
-    "no2": 10,
-    "so2": 1,
-    "co": 4
-   },
-   "pm25_1h": 22.7,
-   "pm25_24h": 37.2,
-   "pm10_1h": 31.2,
-   "pm10_24h": 44.7
-  },
-  {
-   "id": "CA16W",
-   "name": "Cheras",
-   "place": "Sek. Men. Keb. Seri Permaisuri",
-   "state": "WP Kuala Lumpur",
-   "time": "2026-10-31T08:00:00+08:00",
-   "epoch": 1793404800000,
+   "time": "2026-10-31T14:00:00+08:00",
+   "epoch": 1793426400000,
    "api": 74,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
     "pm25": 74,
-    "pm10": 36,
-    "o3": 4,
-    "no2": 8,
-    "so2": null,
-    "co": 10
+    "pm10": 35,
+    "o3": 15,
+    "no2": null,
+    "so2": 1,
+    "co": 3
    },
-   "pm25_1h": 30.9,
-   "pm25_24h": 30.1,
-   "pm10_1h": 35.6,
-   "pm10_24h": 38.8
+   "pm25_1h": 32.8,
+   "pm25_24h": 30.4,
+   "pm10_1h": 44.3,
+   "pm10_24h": 37.9
+  },
+  {
+   "id": "CA16W",
+   "name": "Cheras",
+   "place": "Sek. Men. Keb. Seri Permaisuri",
+   "state": "WP Kuala Lumpur",
+   "time": "2026-10-31T14:00:00+08:00",
+   "epoch": 1793426400000,
+   "api": 76,
+   "cls": "Moderate",
+   "dominant": "PM2.5",
+   "status": 1,
+   "subIndex": {
+    "pm25": 76,
+    "pm10": 37,
+    "o3": 36,
+    "no2": null,
+    "so2": 1,
+    "co": 9
+   },
+   "pm25_1h": 67.3,
+   "pm25_24h": 31.7,
+   "pm10_1h": 79.6,
+   "pm10_24h": 40
   },
   {
    "id": "CA17W",
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-10-31T08:00:00+08:00",
-   "epoch": 1793404800000,
-   "api": 62,
+   "time": "2026-10-31T14:00:00+08:00",
+   "epoch": 1793426400000,
+   "api": 65,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 62,
-    "pm10": 26,
-    "o3": 5,
-    "no2": 10,
-    "so2": 4,
-    "co": 10
+    "pm25": 65,
+    "pm10": 29,
+    "o3": 31,
+    "no2": 3,
+    "so2": 1,
+    "co": 8
    },
-   "pm25_1h": 29.9,
-   "pm25_24h": 20.5,
-   "pm10_1h": 41.4,
-   "pm10_24h": 28
+   "pm25_1h": 18.1,
+   "pm25_24h": 23.1,
+   "pm10_1h": 21,
+   "pm10_24h": 30.9
   }
  ]
 }
