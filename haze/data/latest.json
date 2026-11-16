@@ -1,38 +1,62 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-11-16T01:25:11.846Z",
+ "fetchedAt": "2026-11-16T08:34:54.987Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-11-16T09:00:00+08:00",
-   "epoch": 1794790800000,
-   "api": 50,
+   "time": "2026-11-16T16:00:00+08:00",
+   "epoch": 1794816000000,
+   "api": 35,
    "cls": "Good",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 50,
-    "pm10": 17,
-    "o3": 3,
-    "no2": 5,
+    "pm25": 35,
+    "pm10": 13,
+    "o3": 12,
+    "no2": 14,
     "so2": 1,
     "co": 6
    },
-   "pm25_1h": 9.5,
-   "pm25_24h": 12,
-   "pm10_1h": 18.8,
-   "pm10_24h": 18.4
+   "pm25_1h": 20.4,
+   "pm25_24h": 8.3,
+   "pm10_1h": 26,
+   "pm10_24h": 13.5
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-11-16T09:00:00+08:00",
-   "epoch": 1794790800000,
+   "time": "2026-11-16T16:00:00+08:00",
+   "epoch": 1794816000000,
+   "api": 41,
+   "cls": "Good",
+   "dominant": "PM2.5",
+   "status": 1,
+   "subIndex": {
+    "pm25": 41,
+    "pm10": 15,
+    "o3": 35,
+    "no2": 19,
+    "so2": 1,
+    "co": 10
+   },
+   "pm25_1h": 17,
+   "pm25_24h": 9.7,
+   "pm10_1h": 26.9,
+   "pm10_24h": 15.7
+  },
+  {
+   "id": "CA17W",
+   "name": "Putrajaya",
+   "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
+   "state": "WP Putrajaya",
+   "time": "2026-11-16T16:00:00+08:00",
+   "epoch": 1794816000000,
    "api": 51,
    "cls": "Moderate",
    "dominant": "PM2.5",
@@ -40,39 +64,15 @@
    "subIndex": {
     "pm25": 51,
     "pm10": 16,
-    "o3": 7,
+    "o3": 25,
     "no2": 9,
     "so2": 3,
     "co": 8
    },
-   "pm25_1h": 12,
-   "pm25_24h": 12.5,
-   "pm10_1h": 21,
-   "pm10_24h": 17.7
-  },
-  {
-   "id": "CA17W",
-   "name": "Putrajaya",
-   "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
-   "state": "WP Putrajaya",
-   "time": "2026-11-16T09:00:00+08:00",
-   "epoch": 1794790800000,
-   "api": 55,
-   "cls": "Moderate",
-   "dominant": "PM2.5",
-   "status": 1,
-   "subIndex": {
-    "pm25": 55,
-    "pm10": 19,
-    "o3": 6,
-    "no2": 11,
-    "so2": 3,
-    "co": 8
-   },
-   "pm25_1h": 12.8,
-   "pm25_24h": 15.6,
-   "pm10_1h": 20.2,
-   "pm10_24h": 20.7
+   "pm25_1h": 20.8,
+   "pm25_24h": 12.3,
+   "pm10_1h": 25.1,
+   "pm10_24h": 17.6
   }
  ]
 }
