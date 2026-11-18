@@ -1,62 +1,62 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-11-18T10:43:12.037Z",
+ "fetchedAt": "2026-11-18T19:05:04.748Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-11-18T18:00:00+08:00",
-   "epoch": 1794996000000,
-   "api": 51,
-   "cls": "Moderate",
+   "time": "2026-11-19T03:00:00+08:00",
+   "epoch": 1795028400000,
+   "api": 45,
+   "cls": "Good",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 51,
-    "pm10": 18,
-    "o3": 15,
-    "no2": 12,
+    "pm25": 45,
+    "pm10": 16,
+    "o3": 4,
+    "no2": 9,
     "so2": 1,
-    "co": 5
+    "co": 3
    },
-   "pm25_1h": 13.2,
-   "pm25_24h": 12.4,
-   "pm10_1h": 18.8,
-   "pm10_24h": 19.1
+   "pm25_1h": 5.7,
+   "pm25_24h": 10.8,
+   "pm10_1h": 9.5,
+   "pm10_24h": 17.3
   },
   {
    "id": "CA16W",
    "name": "Cheras",
    "place": "Sek. Men. Keb. Seri Permaisuri",
    "state": "WP Kuala Lumpur",
-   "time": "2026-11-18T18:00:00+08:00",
-   "epoch": 1794996000000,
-   "api": 51,
-   "cls": "Moderate",
-   "dominant": "PM2.5",
+   "time": "1970-01-01T00:00:00+08:00",
+   "epoch": -28800000,
+   "api": null,
+   "cls": null,
+   "dominant": null,
    "status": 1,
    "subIndex": {
-    "pm25": 51,
-    "pm10": 18,
-    "o3": 39,
-    "no2": 12,
-    "so2": 1,
-    "co": 8
+    "pm25": null,
+    "pm10": null,
+    "o3": null,
+    "no2": null,
+    "so2": null,
+    "co": null
    },
-   "pm25_1h": 18.8,
-   "pm25_24h": 12.1,
-   "pm10_1h": 24.3,
-   "pm10_24h": 19
+   "pm25_1h": null,
+   "pm25_24h": null,
+   "pm10_1h": null,
+   "pm10_24h": null
   },
   {
    "id": "CA17W",
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-11-18T18:00:00+08:00",
-   "epoch": 1794996000000,
+   "time": "2026-11-19T03:00:00+08:00",
+   "epoch": 1795028400000,
    "api": 54,
    "cls": "Moderate",
    "dominant": "PM2.5",
@@ -64,15 +64,15 @@
    "subIndex": {
     "pm25": 54,
     "pm10": 19,
-    "o3": 36,
-    "no2": 12,
-    "so2": 3,
-    "co": 7
+    "o3": 13,
+    "no2": 7,
+    "so2": 1,
+    "co": 9
    },
-   "pm25_1h": 15.9,
-   "pm25_24h": 14.2,
-   "pm10_1h": 20.2,
-   "pm10_24h": 20.4
+   "pm25_1h": 17.1,
+   "pm25_24h": 14.6,
+   "pm10_1h": 26.3,
+   "pm10_24h": 20.2
   }
  ]
 }
