@@ -1,30 +1,30 @@
 {
  "source": "Department of Environment Malaysia (APIMS), eqms.doe.gov.my",
- "fetchedAt": "2026-11-20T07:06:15.429Z",
+ "fetchedAt": "2026-11-20T16:05:49.789Z",
  "stations": [
   {
    "id": "CA15W",
    "name": "Batu Muda",
    "place": "Sek. Keb. Batu Muda",
    "state": "WP Kuala Lumpur",
-   "time": "2026-11-20T15:00:00+08:00",
-   "epoch": 1795158000000,
-   "api": 43,
+   "time": "2026-11-21T00:00:00+08:00",
+   "epoch": 1795190400000,
+   "api": 41,
    "cls": "Good",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 43,
+    "pm25": 41,
     "pm10": 16,
-    "o3": 9,
-    "no2": null,
-    "so2": 3,
-    "co": 4
+    "o3": 8,
+    "no2": 12,
+    "so2": 1,
+    "co": 3
    },
-   "pm25_1h": 2.6,
-   "pm25_24h": 10.3,
-   "pm10_1h": 3.7,
-   "pm10_24h": 17.8
+   "pm25_1h": 8.8,
+   "pm25_24h": 9.8,
+   "pm10_1h": 12.4,
+   "pm10_24h": 17.7
   },
   {
    "id": "CA16W",
@@ -55,23 +55,23 @@
    "name": "Putrajaya",
    "place": "Sekolah Kebangsaan Putrajaya Presint 18 (2)",
    "state": "WP Putrajaya",
-   "time": "2026-11-20T15:00:00+08:00",
-   "epoch": 1795158000000,
-   "api": 52,
+   "time": "2026-11-21T00:00:00+08:00",
+   "epoch": 1795190400000,
+   "api": 53,
    "cls": "Moderate",
    "dominant": "PM2.5",
    "status": 1,
    "subIndex": {
-    "pm25": 52,
+    "pm25": 53,
     "pm10": 19,
-    "o3": 17,
-    "no2": 2,
+    "o3": 14,
+    "no2": 7,
     "so2": 1,
     "co": 8
    },
-   "pm25_1h": 8.5,
-   "pm25_24h": 12.5,
-   "pm10_1h": 9.9,
+   "pm25_1h": 13.9,
+   "pm25_24h": 13.3,
+   "pm10_1h": 19.7,
    "pm10_24h": 20.5
   }
  ]
